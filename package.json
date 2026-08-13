@@ -1,0 +1,16 @@
+{
+  "name": "ilewa-referral-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check netlify/functions/waitlist-signup.mjs && node --check netlify/functions/waitlist-confirm.mjs && node --check netlify/functions/waitlist-status.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:ui": "esbuild src/ReferralWaitlist.jsx --bundle --external:react --outfile=/tmp/ilewa-referral-ui.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.55.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

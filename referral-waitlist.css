@@ -1,0 +1,53 @@
+.ilewa-waitlist {
+  --ink: #1f1a17;
+  --paper: #fffdf8;
+  --sand: #f3eadb;
+  --accent: #9f3f2d;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px);
+  border-radius: 28px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 20px 60px rgba(42, 29, 20, .09);
+  font-family: inherit;
+}
+
+.ilewa-waitlist * { box-sizing: border-box; }
+.ilewa-waitlist h1 { margin: 8px 0 16px; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; letter-spacing: -.04em; }
+.ilewa-waitlist h2 { margin: 0 0 10px; font-size: 1.25rem; }
+.ilewa-eyebrow { margin: 0; color: var(--accent); font-size: .75rem; font-weight: 800; letter-spacing: .16em; }
+.ilewa-intro { max-width: 620px; color: #62564e; font-size: 1.08rem; line-height: 1.6; }
+.ilewa-waitlist form { display: grid; gap: 16px; margin-top: 28px; }
+.ilewa-waitlist label { display: grid; gap: 7px; font-size: .86rem; font-weight: 700; }
+.ilewa-waitlist input { width: 100%; min-height: 48px; border: 1px solid #d8cabb; border-radius: 12px; background: #fff; padding: 0 14px; color: var(--ink); font: inherit; }
+.ilewa-waitlist input:focus { outline: 3px solid rgba(159, 63, 45, .15); border-color: var(--accent); }
+.ilewa-consent { grid-template-columns: 20px 1fr; align-items: start; font-weight: 500 !important; line-height: 1.45; }
+.ilewa-consent input { width: 18px; min-height: 18px; margin: 2px 0 0; }
+.ilewa-honeypot { position: absolute; left: -9999px; }
+.ilewa-primary, .ilewa-link-row button { min-height: 50px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; padding: 0 22px; font: inherit; font-weight: 800; cursor: pointer; }
+.ilewa-primary:disabled { cursor: wait; opacity: .55; }
+.ilewa-fine-print { color: #766a62; font-size: .82rem; }
+.ilewa-success, .ilewa-error { margin-top: 16px; border-radius: 12px; padding: 12px 14px; }
+.ilewa-success { background: #eaf6e9; color: #285a2f; }
+.ilewa-error { background: #fff0ed; color: #8a2e21; }
+.ilewa-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+.ilewa-stat-grid div { display: grid; gap: 6px; border-radius: 16px; background: var(--sand); padding: 20px; }
+.ilewa-stat-grid strong { font-size: clamp(1.5rem, 4vw, 2.4rem); }
+.ilewa-stat-grid span { color: #6b5e54; font-size: .82rem; }
+.ilewa-share-card, .ilewa-rewards { margin-top: 18px; border: 1px solid #e1d5c8; border-radius: 18px; padding: 22px; }
+.ilewa-link-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin: 18px 0 12px; }
+.ilewa-share-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
+.ilewa-share-buttons a { border-radius: 999px; background: var(--sand); padding: 9px 14px; color: var(--ink); text-decoration: none; font-size: .86rem; font-weight: 700; }
+.ilewa-rewards > div { display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 10px; border-top: 1px solid #eee3d7; padding: 13px 0; opacity: .55; }
+.ilewa-rewards > div > span { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-weight: 800; }
+.ilewa-rewards > div p { display: grid; gap: 3px; margin: 0; }
+.ilewa-rewards small { color: #74685f; }
+.ilewa-rewards > div.earned { color: #2f6d3c; opacity: 1; }
+.ilewa-next { margin-bottom: 0; color: var(--accent); font-weight: 700; }
+
+@media (max-width: 600px) {
+  .ilewa-waitlist { border-radius: 0; }
+  .ilewa-stat-grid { grid-template-columns: 1fr; }
+  .ilewa-link-row { grid-template-columns: 1fr; }
+}
