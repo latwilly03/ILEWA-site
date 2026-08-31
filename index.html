@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ <!-- Favicon links (go right after meta tags) -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+<!-- Apple devices -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Web manifest (optional, for PWA support) -->
+  <link rel="manifest" href="site.webmanifest">
+
+    <title>ILEWA | The Future of Beauty Retail</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Ojuju:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- Color Variables (From user prompt) --- */
+        :root {
+            --white: #ffffff;
+            --light-green: #EAFAEA; /* Very light background for sections */
+            --mid-green: #CAE0BC; /* Soft background/light contrast */
+            --dark-green: #6E8E59; /* Text/Accent */
+            --brand-red: #780C28; /* Primary Brand Accent (Rich Burgundy) */
+            --overlay-green-rgba: rgba(110, 142, 89, 0.5); /* #6E8E59 at 50% opacity */
+            --dark-text: #2c3e2e; /* Using a near-black dark text for readability */
+
+            /* New FAQ colors for contrast, inspired by images - ADJUSTED */
+            --faq-bg: var(--light-green); /* Changed to light green brand color */
+            --faq-item-bg: var(--white); /* White background for items */
+            --faq-item-border: var(--mid-green); /* Mid green border */
+            --faq-text-color: var(--dark-text); /* Dark text for answers */
+            --faq-question-color: var(--brand-red); /* Red for questions */
+            --faq-plus-color: var(--brand-red); /* Red for plus icon */
+            --faq-hover-bg: var(--mid-green); /* Mid green for hover */
+        }
+
+        /* --- Base Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-green); /* Start with lightest background */
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Ojuju', sans-serif;
+            font-weight: 800; /* Ojuju Extra Bold for headings */
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        p {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .button-cta {
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            padding: 18px 35px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .button-cta:hover {
+            background-color: var(--dark-green); 
+            transform: translateY(-2px);
+        }
+
+        /* ======================================= */
+        /* --- NAVIGATION (Sticky/Scroll Effect) --- */
+        /* ======================================= */
+        .navbar {
+            display: flex;
+            justify-content: flex-end; 
+            align-items: center;
+            padding: 15px 40px;
+            background-color: var(--brand-red);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            box-sizing: border-box;
+        }
+
+        /* New: Partner Link (Separate from main links) */
+        .nav-partner-link {
+            font-family: 'Lato', sans-serif;
+            font-size: 15px; 
+            font-weight: 700;
+            color: var(--mid-green); /* Highlighted in a secondary color */
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 15px;
+            border: 2px solid var(--mid-green);
+            border-radius: 5px;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-partner-link:hover {
+            background-color: var(--mid-green);
+            color: var(--brand-red);
+        }
+
+        /* Header Title - Now used for the scroll-in center logo */
+        .nav-title {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 24px;
+            color: var(--white);
+            letter-spacing: 3px;
+            /* Center the title when it appears by taking up all available space to its left and right */
+            margin-left: auto; 
+            margin-right: auto; 
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.4s ease;
+            position: absolute; /* Allows for easy centering */
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            pointer-events: none; /* Make sure it doesn't block the nav links */
+        }
+        .nav-links-wrapper {
+            display: flex;
+            margin-left: auto; /* Push all links right */
+        }
+
+        /* State when scrolled down (controlled by JS) */
+        .scrolled .nav-title {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .scrolled .navbar {
+            padding: 12px 40px; 
+        }
+
+        .nav-link {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px; /* Smaller font size for max visibility */
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+        }
+        .nav-link:last-child {
+             padding-right: 0;
+        }
+        
+        /* ======================================= */
+        /* --- HERO SECTION --- */
+        /* ======================================= */
+        .hero-section {
+            display: flex;
+            min-height: 90vh; 
+            background-color: var(--light-green);
+        }
+
+        .hero-left {
+            flex: 1;
+            padding: 100px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 2;
+        }
+
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Image Overlay */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--overlay-green-rgba); /* Green overlay with 0.5 opacity */
+        }
+        
+        /* New Styles for hero section typography */
+        .hero-brand-logo {
+            font-family: 'Ojuju', sans-serif; /* Back to Ojuju */
+            font-size: 8vw; /* Retained previous large size for visual impact */
+            line-height: 1;
+            font-weight: 800;
+            color: var(--brand-red);
+            margin: 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out 0.2s, transform 1s ease-out 0.2s;
+            letter-spacing: 5px;
+        }
+        .hero-title-tagline {
+            font-family: 'Lato', sans-serif; /* Changed to Lato */
+            font-size: 2.5vw; /* Larger than tagline-long */
+            font-weight: 700; /* Bold */
+            color: var(--dark-green);
+            margin: 0 0 20px 0;
+            line-height: 1;
+            letter-spacing: 3px;
+            text-transform: uppercase; /* Ensure it stays uppercase */
+        }
+
+        .hero-section.loaded .hero-brand-logo {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-tagline-long {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--dark-text);
+            margin-bottom: 12px;
+            max-width: 500px;
+        }
+
+        .hero-incentive-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+        .hero-social-proof {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--dark-text);
+            opacity: 0.75;
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+        .heart-icon {
+            color: var(--brand-red);
+            margin-right: 4px;
+        }
+        /* Mobile overrides for new text */
+        @media (max-width: 600px) {
+            .hero-incentive-text {
+                color: #EAFAEA;
+                text-align: center;
+                font-size: 14px;
+            }
+            .hero-social-proof {
+                color: rgba(255,255,255,0.8);
+                text-align: center;
+                font-size: 13px;
+            }
+        }
+
+        /* ======================================= */
+        /* --- ABOUT SECTION --- */
+        /* ======================================= */
+        .about-section {
+            background-color: var(--white);
+            padding: 120px 0;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 60px;
+            margin-bottom: 20px; /* Reduced space below heading */
+            color: var(--brand-red); /* Changed to red */
+            font-weight: 700; /* Ojuju bold */
+        }
+        .about-text {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--dark-text);
+            font-weight: 400;
+            text-align: left;
+            padding: 0 20px;
+        }
+        .about-text strong {
+            font-weight: 700;
+            color: var(--brand-red);
+        }
+        .ilewa-meaning {
+            font-style: italic;
+            font-weight: 700;
+            color: var(--brand-red); /* Changed to red */
+        }
+        /* Removed .about-image-container to remove the image entirely */
+        
+        /* ======================================= */
+        /* --- QUIZ/GAME SECTION (NEW STYLES) --- */
+        /* ======================================= */
+        .quiz-section {
+            padding: 100px 40px;
+            min-height: 90vh; /* Make the game section bigger */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--mid-green); /* Use mid-green for contrast */
+            text-align: center;
+            overflow: hidden; 
+        }
+        
+        .game-container {
+            max-width: 900px; /* Increased max-width */
+            width: 100%; /* Ensure it takes available width within max-width */
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 60px; /* Increased padding */
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--dark-green);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out; 
+        }
+
+        .game-container h2 {
+            font-size: 52px;
+            color: var(--brand-red);
+            margin-bottom: 20px;
+        }
+        .game-container h3 {
+             font-size: 32px;
+             color: var(--dark-green);
+             margin-top: 0;
+        }
+        .mirror-subhead {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark-green);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            margin-top: -10px;
+        }
+        
+        /* --- Mirror Test Specific Styles --- */
+        #mirror-test .options {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        #mirror-test .options label {
+            display: block;
+            padding: 15px;
+            background-color: var(--light-green);
+            border: 2px solid var(--mid-green);
+            border-radius: 8px;
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        #mirror-test .options label:hover {
+            border-color: var(--dark-green);
+            background-color: var(--mid-green);
+        }
+        #mirror-test input[type=radio] {
+            display: none; /* Hide the default radio button */
+        }
+        #mirror-test input[type=radio]:checked + span {
+            /* Span is what is visible to the user */
+            display: inline;
+        }
+        #mirror-test input[type=radio]:checked ~ span::before {
+             content: "✓ "; /* Checkmark on selected option */
+             color: var(--brand-red);
+             font-weight: 800;
+        }
+        #mirror-test .screen button {
+            /* Apply button-cta styles to quiz buttons for consistency */
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            margin: 20px 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #mirror-test .screen button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* --- Guess the Brand Specific Styles --- */
+        #guess-the-brand #gtb-input {
+            width: 80%;
+            padding: 15px;
+            border: 2px solid var(--mid-green);
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0 10px;
+            box-sizing: border-box;
+        }
+        #guess-the-brand #gtb-feedback {
+            color: var(--brand-red);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        /* Style for Guess the Brand buttons matching .button-cta */
+        #guess-the-brand .screen button {
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            margin: 20px 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #guess-the-brand .screen button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* ======================================= */
+        /* --- POPUP / MODAL STYLES --- */
+        /* ======================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--white);
+            color: var(--dark-text);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-content h3 {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 32px;
+            color: var(--brand-red);
+            margin-bottom: 15px;
+        }
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .modal-content button {
+            background-color: var(--brand-red);
+            color: var(--white);
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .modal-content button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* ======================================= */
+        /* --- CTA SECTION (Netlify Form Ready) --- */
+        /* ======================================= */
+        .central-cta-section {
+            background-color: var(--brand-red);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 40px;
+            border-top: 8px solid var(--dark-green);
+            border-bottom: 8px solid var(--dark-green);
+        }
+        
+        .waitlist-slogan {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .central-cta-section h2 {
+            font-size: 64px;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .central-cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .waitlist-form {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .waitlist-fields {
+            display: grid;
+            grid-template-columns: 0.8fr 1.35fr auto;
+            gap: 12px;
+            align-items: stretch;
+        }
+        .waitlist-form input[type="text"],
+        .waitlist-form input[type="email"] {
+            padding: 15px;
+            border: 2px solid var(--dark-green);
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            min-width: 0;
+        }
+        .waitlist-form button {
+            flex-shrink: 0;
+        }
+        .waitlist-consent {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 9px;
+            max-width: 650px;
+            margin: 14px auto 0;
+            color: rgba(255,255,255,0.86);
+            font-size: 13px;
+            line-height: 1.45;
+            text-align: left;
+        }
+        .waitlist-consent input {
+            width: 17px;
+            height: 17px;
+            margin-top: 2px;
+            accent-color: var(--dark-green);
+            flex: 0 0 auto;
+        }
+        .waitlist-honeypot {
+            position: absolute !important;
+            left: -10000px !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+        }
+        .waitlist-feedback {
+            display: none;
+            max-width: 650px;
+            margin: 18px auto 0;
+            padding: 13px 16px;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+        .waitlist-feedback.is-success {
+            display: block;
+            background: var(--mid-green);
+            color: var(--dark-text);
+        }
+        .waitlist-feedback.is-error {
+            display: block;
+            background: #fff0f2;
+            color: var(--brand-red);
+        }
+        .referral-dashboard {
+            display: none;
+            max-width: 820px;
+            margin: 34px auto 0;
+            padding: 28px;
+            border: 2px solid var(--mid-green);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--dark-text);
+            text-align: left;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+        }
+        .referral-dashboard.is-visible { display: block; }
+        .referral-dashboard h3 {
+            margin: 0 0 8px;
+            color: var(--brand-red);
+            font-size: 34px;
+        }
+        .referral-dashboard > p { margin: 0 0 20px; font-size: 16px; }
+        .referral-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .referral-stat {
+            padding: 16px;
+            border-radius: 7px;
+            background: var(--light-green);
+            text-align: center;
+        }
+        .referral-stat strong {
+            display: block;
+            color: var(--brand-red);
+            font-family: 'Ojuju', sans-serif;
+            font-size: 32px;
+            line-height: 1;
+        }
+        .referral-stat span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+        .referral-link-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            margin: 18px 0 12px;
+        }
+        .referral-link-row input {
+            min-width: 0;
+            padding: 13px;
+            border: 2px solid var(--mid-green);
+            border-radius: 5px;
+            font: inherit;
+        }
+        .referral-share-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
+        .referral-share-buttons a,
+        .referral-share-buttons button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--mid-green);
+            color: var(--dark-text);
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            line-height: 1.2;
+            text-decoration: none;
+        }
+        .referral-share-buttons .referral-story-button {
+            background: var(--brand-red);
+            color: var(--white);
+        }
+        .referral-share-note {
+            margin: 11px 0 0 !important;
+            color: var(--dark-green);
+            font-size: 12px !important;
+            line-height: 1.45;
+        }
+        .referral-rewards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 9px;
+            margin-top: 24px;
+        }
+        .referral-reward {
+            padding: 13px;
+            border: 1px solid var(--mid-green);
+            border-radius: 7px;
+            opacity: .55;
+        }
+        .referral-reward.is-earned { background: var(--light-green); opacity: 1; }
+        .referral-reward strong { display: block; color: var(--brand-red); }
+        .referral-reward span { font-size: 12px; }
+        .referral-next-reward { margin: 16px 0 0 !important; color: var(--brand-red); font-weight: 700; }
+
+        /* ======================================= */
+        /* --- IMAGE GRID SECTION (Carousel Animation) --- */
+        /* ======================================= */
+        .image-grid-section {
+            background-color: var(--light-green);
+            padding: 80px 0;
+            overflow: hidden; 
+        }
+        .grid-header {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 52px;
+            color: var(--brand-red);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .horizontal-scroll-wrapper {
+            display: flex;
+            padding: 20px 0;
+            gap: 30px;
+            /* Animation properties */
+            animation: scroll-left 40s linear infinite;
+        }
+
+        /* Stop animation on hover for user interaction */
+        .horizontal-scroll-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                /* Translate by the width of a set of duplicated images */
+                transform: translateX(-50%); 
+            }
+        }
+        
+        .grid-item {
+            min-width: 300px; 
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0; /* Prevents shrinking */
+            border: 4px solid var(--mid-green);
+            transition: transform 0.5s ease;
+        }
+        .grid-item:hover {
+            transform: scale(1.03);
+            border-color: var(--dark-green);
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Duplicate the content for seamless infinite scroll (done in HTML/JS) */
+
+        /* ======================================= */
+        /* --- FAQ SECTION --- */
+        /* ======================================= */
+        .faq-section {
+            padding: 100px 40px;
+            background-color: var(--faq-bg); /* Adjusted background color */
+            color: var(--faq-text-color); /* Dark text for answers */
+        }
+        .faq-section h2 {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 60px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--brand-red); /* Red heading */
+        }
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid var(--faq-item-border);
+        }
+        .faq-item {
+            background-color: var(--faq-item-bg); /* White background for items */
+            border-radius: 0;
+            margin-bottom: 0;
+            box-shadow: none;
+            overflow: hidden;
+            border-bottom: 1px solid var(--faq-item-border);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: var(--faq-question-color); /* Red for questions */
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .faq-question:hover {
+            background-color: var(--faq-hover-bg); /* Mid green for hover */
+            color: var(--brand-red); /* Red on hover for question text */
+        }
+        .faq-item.active .faq-question {
+            background-color: var(--faq-hover-bg); /* Mid green for active item */
+        }
+        .faq-question i {
+            font-size: 20px;
+            color: var(--faq-plus-color); /* Red for plus icon */
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+             max-height: 0;
+             transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+             padding: 0 30px;
+             font-size: 18px;
+             color: var(--faq-text-color);
+        }
+        .faq-answer p {
+             padding-bottom: 25px;
+             margin: 0;
+             line-height: 1.8;
+             opacity: 0.9; /* Slightly more opaque answer text */
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px; /* Adjust as needed for content */
+            padding-bottom: 25px;
+        }
+        
+        /* ======================================= */
+        /* --- FOOTER (Wavy Border & New Copy) --- */
+        /* ======================================= */
+        .footer-wrapper {
+            background-color: var(--brand-red);
+            color: var(--white);
+        }
+        /* Straight Border Effect */
+        .wavy-border {
+            position: relative;
+            height: 8px; /* Height of the straight border */
+            width: 100%;
+            background-color: var(--dark-green); /* Solid dark green bar */
+            overflow: hidden;
+        }
+
+        /* Removed .wavy-border::before as it's no longer needed for a solid border */
+
+        .footer-content {
+            padding: 40px 20px 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 48px;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .footer-waitlist-cta {
+             margin-top: 30px;
+             margin-bottom: 40px;
+        }
+        .footer-waitlist-cta .button-cta {
+            background-color: var(--dark-green);
+        }
+        .footer-waitlist-cta .button-cta:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+        }
+        
+        .social-links {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .social-links a {
+            font-size: 32px;
+            color: var(--white);
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+             color: var(--dark-green);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--mid-green);
+            font-family: 'Lato', sans-serif;
+        }
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 1024px) {
+            .hero-section { flex-direction: column; min-height: auto; }
+            .hero-left, .hero-right { padding: 80px 40px; }
+            .hero-brand-logo { font-size: 15vw; }
+            .hero-title-tagline { font-size: 5vw; }
+            .hero-right { height: 400px; }
+            .about-section h2, .grid-header, .faq-section h2, .footer-title { font-size: 42px; }
+            .faq-question { font-size: 20px; }
+            .game-container { padding: 40px; max-width: 800px; } /* Adjust game container for medium screens */
+        }
+        @media (max-width: 768px) {
+             .nav-link { font-size: 13px; padding: 5px 8px; }
+             .nav-partner-link { font-size: 13px; margin-right: 10px; padding: 5px 10px; }
+             .game-container { padding: 30px; max-width: 100%; margin: 0 20px; } /* Adjust game container for small screens */
+        }
+        @media (max-width: 600px) {
+            .navbar { padding: 10px 20px; }
+            .hero-left { padding: 60px 20px 40px 20px; }
+            .hero-brand-logo { font-size: 15vw; }
+            .hero-title-tagline { font-size: 5vw; }
+            .waitlist-form { max-width: 360px; }
+            .waitlist-fields { grid-template-columns: 1fr; }
+            .waitlist-form input, .waitlist-form button { border-radius: 5px; width: 100%; box-sizing: border-box; }
+            .referral-stats { grid-template-columns: 1fr; }
+            .referral-link-row { grid-template-columns: 1fr; }
+            .referral-share-buttons a,
+            .referral-share-buttons button { flex: 1 1 calc(50% - 5px); }
+            .referral-rewards { grid-template-columns: 1fr 1fr; }
+            .central-cta-section h2 { font-size: 38px; }
+            .game-container { padding: 25px; } /* Further adjust game container for very small screens */
+            .faq-question { font-size: 18px; padding: 15px 20px; }
+            .faq-answer p { font-size: 16px; }
+        }
+
+/* ========================================================= */
+/* === FINAL MOBILE OPTIMIZATION FOR ILEWA (under 600px) === */
+/* ========================================================= */
+@media (max-width: 600px) {
+
+  /* 1. Remove desktop header/nav on mobile */
+  .navbar {
+    display: none !important;
+  }
+
+  /* 2. Add translucent red bar once hero is scrolled past */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background-color: rgba(120, 12, 40, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 900;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  body.scrolled::before { opacity: 1; }
+
+  /* Mobile logo visible when bar appears */
+  .nav-title {
+    display: block;
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #ffffff;
+    font-family: 'Ojuju', sans-serif;
+    letter-spacing: 3px;
+    z-index: 1000;
+  }
+
+  /* Hide partner & other links */
+  .nav-partner-link, .nav-links-wrapper { display: none !important; }
+
+  /* ========================================================= */
+  /* === HERO SECTION (single background image, centered text) === */
+  /* ========================================================= */
+  .hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    background-image: url("https://mapaon.com/wp-content/uploads/2024/10/IMG_3015-scaled.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Remove the right image element and green overlay entirely on mobile */
+  .hero-right { display: none; }
+
+  /* Slight dark overlay for legibility */
+  .hero-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 0;
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+    align-items: center;
+  }
+
+  .hero-brand-logo {
+    font-size: 22vw;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 15px;
+  }
+
+  .hero-title-tagline {
+    color: #EAFAEA;
+    font-size: 6vw;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .hero-tagline-long {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 90%;
+    margin: 0 auto 25px;
+  }
+
+  .button-cta.hero-cta {
+    background-color: #6E8E59; /* dark green */
+    color: #ffffff;
+    font-size: 16px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  /* ========================================================= */
+  /* === IMAGE GRID / CAROUSEL ADJUSTMENTS === */
+  /* ========================================================= */
+/* --- MOBILE SWIPEABLE IMAGE FIXED DIMENSIONS --- */
+.image-grid-section {
+  padding: 50px 0 60px;
+  overflow-x: hidden;
+  background-color: var(--light-green);
+  box-sizing: border-box; 
+  width: 100vw; 
+}
+
+.grid-header {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Enable clean swipe interaction */
+.horizontal-scroll-wrapper {
+   /* 1. Stop the desktop animation */
+    animation: none !important;
+    animation-play-state: running !important;
+    width: auto;
+    
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    overflow-x: auto; /* ENABLES USER SWIPE */
+    scroll-snap-type: x proximity;
+    
+    /* Fixes for the cutoff: */
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    /* 2. CRITICAL FIX: Unit added to negative margin */
+    margin-right: -20px; 
+    
+    margin-left: 0;
+    padding-top: 10px; 
+    padding-bottom: 20px;
+
+}
+
+/* Hide scrollbar */
+.horizontal-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+  height: 0;
+}
+
+/* Each card larger and better proportioned */
+.grid-item {
+  flex: 0 0 auto;
+  width: 170px;       /* wider */
+  height: 220px;      /* taller */
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--mid-green);
+  background-color: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  scroll-snap-align: start;
+  transition: transform 0.15s ease;
+}
+
+.grid-item:hover {
+  transform: scale(1.03);
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* shows full product instead of cropping */
+  background-color: var(--white); /* prevents color bleed */
+  padding: 5px; /* small padding to prevent edge clipping */
+}
+
+  /* ========================================================= */
+  /* === FAQ & FOOTER ADJUSTMENTS === */
+  /* ========================================================= */
+  .faq-section {
+    padding: 60px 20px;
+  }
+  .faq-section h2 {
+    font-size: 32px;
+  }
+  .faq-question {
+    font-size: 18px;
+    padding: 15px 12px;
+  }
+  .faq-answer p {
+    font-size: 15px;
+  }
+
+  .footer-title {
+    font-size: 26px;
+  }
+  .social-links a {
+    font-size: 22px;
+  }
+}
+
+
+        .cta-incentive-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--mid-green);
+            margin-bottom: 20px;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+        .cta-social-proof {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal-overlay" id="customModal">
+    <div class="modal-content">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button id="modalButton">OK</button>
+    </div>
+</div>
+
+<nav class="navbar" id="navbar">
+    <a href="#" class="nav-title">ILEWA</a>
+    
+    <a href="partner.html" class="nav-partner-link" data-netlify-form-id="partner-form">BECOME A PARTNER</a>
+
+    <div class="nav-links-wrapper">
+        <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#quiz" onclick="showGame('guess')" class="nav-link">GUESS THE BRAND</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+</nav>
+
+<form name="partner" netlify netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="partner" />
+    <input name="name" type="text" />
+    <input name="email" type="email" />
+    <textarea name="message"></textarea>
+</form>
+
+<section class="hero-section loaded">
+    <div class="hero-left">
+        <h1 class="hero-brand-logo">ILEWA</h1>
+        <h2 class="hero-title-tagline">The beauty industry ignored you. We didn't.</h2>
+
+        <p class="hero-tagline-long">
+            Brands curated for you. One place.
+        </p>
+        <p class="hero-incentive-text">Join First Access → Share your link → Refer 50 verified friends for $10 launch credit</p>
+        <a href="#cta" class="button-cta hero-cta">GET FIRST ACCESS</a>
+        <p class="hero-social-proof">Join 60+ beauty explorers already on the First Access List</p>
+    </div>
+
+    <div class="hero-right">
+        <img src="https://mapaon.com/wp-content/uploads/2024/10/IMG_3015-scaled.jpg"
+             alt="Luxury cosmetics and foundation products on display.">
+        <div class="image-overlay"></div>
+    </div>
+</section>
+
+<section class="about-section" id="about">
+    <div class="container">
+        <h2>Built for Discovery</h2>
+        <div class="about-text">
+            <p><span class="ilewa-meaning">Ilewa means 'beautiful home.'</span> We're building one for Black-owned beauty brands – and for you.</p>
+            <p>A place where discovery isn't random, it's curated. Where sampling a new foundation doesn't mean wasting money on the wrong shade.</p>
+            <p>Where every brand sees you, because we only work with founders who do.</p>
+            <p>This isn't another beauty store. It's the discovery layer you've been missing.</p>
+        </div>
+    </div>
+    </section>
+
+<section class="quiz-section" id="quiz">
+    <div id="mirror-test" class="game-container" style="display:block;">
+        <div id="mirror-intro" class="screen">
+            <h2>The Mirror Test</h2>
+            <p class="mirror-subhead">Answer 5 questions. Unlock personalized brand matches. Coming soon.</p>
+            <p>Discover what your beauty says about you. Take a breath and begin.</p>
+            <button onclick="startMirrorTest()">Start</button>
+        </div>
+    
+        <div id="mirror-question" class="screen" style="display:none;">
+            <h3 id="mirror-question-text"></h3>
+            <div id="mirror-options" class="options"></div>
+            <button onclick="nextMirrorQuestion()">Next</button>
+        </div>
+    
+        <div id="mirror-result" class="screen" style="display:none;">
+            <h3 id="mirror-result-title"></h3>
+            <p id="mirror-result-desc"></p>
+            <button onclick="window.location.href='#cta'">Join the First Access List</button>
+            <button onclick="showGame('guess')">Play Guess the Brand</button>
+        </div>
+    </div>
+
+    <div id="guess-the-brand" class="game-container" style="display:none;">
+        <div id="gtb-intro" class="screen">
+            <h2>Guess the Brand</h2>
+            <p>Can you recognize today’s featured Black owned beauty brand?</p>
+            <button onclick="startGTB()">Start Playing</button>
+        </div>
+    
+        <div id="gtb-play" class="screen" style="display:none;">
+            <p id="gtb-hint"></p>
+            <input id="gtb-input" placeholder="Type your guess" />
+            <button onclick="submitGTB()">Submit</button>
+            <button onclick="nextHint()">Reveal Next Hint</button>
+            <p id="gtb-feedback"></p>
+        </div>
+    
+        <div id="gtb-result" class="screen" style="display:none;">
+            <h3 id="gtb-result-heading"></h3>
+            <p id="gtb-result-desc"></p>
+            <button onclick="window.location.href='#cta'">Join the First Access List</button>
+            <button onclick="startGTB()">Play Again</button>
+        </div>
+    </div>
+</section>
+
+<section class="central-cta-section" id="cta">
+    <div class="waitlist-slogan">WE’RE BUILDING A COMMUNITY</div> 
+    <h2>JOIN THE FIRST ACCESS LIST</h2>
+    <p>
+        Be the first to explore Ilewa, meet new brands, and earn rewards every time you shop.
+    </p>
+
+    <p class="cta-incentive-text"><em>Get your referral link, move up the list, and unlock founding-member rewards.</em></p>
+
+    <form class="waitlist-form" id="waitlist-form" name="waitlist" method="POST" data-netlify="true" novalidate>
+        <input type="hidden" name="form-name" value="waitlist" />
+        <div class="waitlist-honeypot" aria-hidden="true">
+            <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="waitlist-fields">
+            <input type="text" name="firstName" placeholder="First Name" aria-label="First name" maxlength="60" autocomplete="given-name">
+            <input type="email" name="email" placeholder="Your Email Address" aria-label="Email address" autocomplete="email" required>
+            <button type="submit" class="button-cta" id="waitlist-submit">GET FIRST ACCESS</button>
+        </div>
+        <label class="waitlist-consent">
+            <input type="checkbox" name="consent" value="yes" required>
+            <span>I agree to receive ILEWA waitlist and launch emails. I can unsubscribe at any time.</span>
+        </label>
+    </form>
+    <div class="waitlist-feedback" id="waitlist-feedback" role="status" aria-live="polite"></div>
+    <p class="cta-social-proof">Join 60+ beauty explorers already on the First Access List</p>
+
+    <div class="referral-dashboard" id="referral-dashboard" aria-live="polite">
+        <h3 id="referral-greeting">YOU’RE IN.</h3>
+        <p>Every friend who joins with your link and confirms their email moves you higher on the First Access List.</p>
+        <div class="referral-stats">
+            <div class="referral-stat"><strong id="referral-rank">–</strong><span>Your position</span></div>
+            <div class="referral-stat"><strong id="referral-count">0</strong><span>Verified referrals</span></div>
+            <div class="referral-stat"><strong id="verified-members">–</strong><span>Verified members</span></div>
+        </div>
+        <div class="referral-link-row">
+            <input id="referral-link" type="text" readonly aria-label="Your ILEWA referral link">
+            <button type="button" class="button-cta" id="copy-referral-link">COPY LINK</button>
+        </div>
+        <div class="referral-share-buttons">
+            <a id="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <button type="button" id="share-instagram-dm"><i class="fab fa-instagram"></i> Instagram DM</button>
+            <button type="button" class="referral-story-button" id="share-instagram-story"><i class="fab fa-instagram"></i> Instagram Story</button>
+            <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a id="share-x" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> X</a>
+            <a id="share-email" href="#"><i class="fas fa-envelope"></i> Email</a>
+            <button type="button" id="share-tiktok"><i class="fab fa-tiktok"></i> TikTok / More</button>
+        </div>
+        <p class="referral-share-note">For Instagram Stories, ILEWA creates your branded story and copies your link. In Instagram, add the Link sticker and paste.</p>
+        <div class="referral-rewards" id="referral-rewards">
+            <div class="referral-reward" data-threshold="1"><strong>1 referral</strong><span>Founding Member badge</span></div>
+            <div class="referral-reward" data-threshold="3"><strong>3 referrals</strong><span>Priority early access</span></div>
+            <div class="referral-reward" data-threshold="5"><strong>5 referrals</strong><span>First-drop access</span></div>
+            <div class="referral-reward" data-threshold="50"><strong>50 referrals</strong><span>$10 launch credit</span></div>
+        </div>
+        <p class="referral-next-reward" id="referral-next-reward"></p>
+    </div>
+</section>
+
+<section class="image-grid-section">
+    <h2 class="grid-header">YOUR NEXT BEAUTY OBSESSION AWAITS</h2>
+    <div class="horizontal-scroll-wrapper" id="scroll-wrapper">
+        <div class="grid-item"><img src="https://cdn.prod.website-files.com/621796a8c6ab99d03ddfa05c/67a924726def185314354907_Sliq_Product_Campaign0586-p-2600.jpeg" alt="Sliq Product, black owned hair care brand, black beauty, natural hair care, curly hair care, deep conditioner"></div>
+        <div class="grid-item"><img src="https://moodeaux.com/cdn/shop/files/MOODEAUX_PunkStar_Eau_de_Parfum_50mL_900x.png?v=1730893512" alt="Moodeaux Perfume, Black Owned Perfume Brand,black beauty"></div>
+        <div class="grid-item"><img src="https://shop.deonlibra.com/cdn/shop/files/counterkitsiteupdate_3000x.png?v=1754786773" alt="Deon Libra Counterkit| Black Owned beauty business| black owned"></div>
+        <div class="grid-item"><img src="https://is4.revolveassets.com/images/p4/n/z/OPLR-WU5_V1.jpg" alt="Oplare Lip Balm, Black owned lip balm, lipgloss, Black owned Beauty prodcuts"></div>
+        <div class="grid-item"><img src="https://cdn.shopify.com/s/files/1/0939/6702/4393/files/silk-veil-tuberose-jasmine-shower-oil-39bc_2_3d087cec-1c10-48af-a466-b37defaafbde.png?v=1753453835&width=1000&height=1333&crop=center" alt="Silk Veil Shower Oil, black owned beauty brand, body oil, shiny skin"></div>
+
+        <div class="grid-item"><img src="https://www.naturallydrenched.com/cdn/shop/files/2_f2153191-c340-4f5c-84e0-bd2893418335.png?v=1739588679&width=528" alt="Naturally Drenched Hair Product| black owned hair care brand| black owned beauty | natural hair| curly hair"></div>
+        <div class="grid-item"><img src="https://heavenlyskincare.co/cdn/shop/files/HBN_WHITEBG_IMAGERY-3.jpg?v=1743015490&width=1200" alt="Heavenly Skincare Body Oil, black owned business, black owned beauty company, body oil, body care"></div>
+        <div class="grid-item"><img src="https://doncosmetics.co/cdn/shop/files/LSP_01.png?v=1713370903&width=823" alt="Don Cosmetics Lip Shine , black owned business, black owned beauty brand, lipgloss, makeup"></div>
+        <div class="grid-item"><img src="https://naturalhair.org/cdn/shop/files/HoneyCurlsCurlStyler12oz-Flat_1024x1024@2x.jpg?v=1745591680" alt="Honey Curls Styler, black owned business, natural hair care, curly hair care"></div>
+        <div class="grid-item"><img src="https://www.michebeauty.com/cdn/shop/files/IMG-2450.jpg?v=1720587606&width=1800" alt="Miche Beauty Products, natural hair care, curly hair care, black owned business"></div>
+        
+        <div class="grid-item"><img src="https://cdn.prod.website-files.com/621796a8c6ab99d03ddfa05c/67a924726def185314354907_Sliq_Product_Campaign0586-p-2600.jpeg" alt="Sliq Product| deep conditoner| black owned hair care brand| natural hair care"></div>
+        <div class="grid-item"><img src="https://moodeaux.com/cdn/shop/files/MOODEAUX_PunkStar_Eau_de_Parfum_50mL_900x.png?v=1730893512" alt="Moodeaux Perfume"></div>
+        <div class="grid-item"><img src="https://shop.deonlibra.com/cdn/shop/files/counterkitsiteupdate_3000x.png?v=1754786773" alt="Deon Libra Counterkit"></div>
+        <div class="grid-item"><img src="https://is4.revolveassets.com/images/p4/n/z/OPLR-WU5_V1.jpg" alt="Oplare Lip Balm"></div>
+        <div class="grid-item"><img src="https://cdn.shopify.com/s/files/1/0939/6702/4393/files/silk-veil-tuberose-jasmine-shower-oil-39bc_2_3d087cec-1c10-48af-a466-b37defaafbde.png?v=1753453835&width=1000&height=1333&crop=center" alt="Silk Veil Shower Oil"></div>
+        <div class="grid-item"><img src="https://www.naturallydrenched.com/cdn/shop/files/2_f2153191-c340-4f5c-84e0-bd2893418335.png?v=1739588679&width=528" alt="Naturally Drenched Hair Product"></div>
+        <div class="grid-item"><img src="https://heavenlyskincare.co/cdn/shop/files/HBN_WHITEBG_IMAGERY-3.jpg?v=1743015490&width=1200" alt="Heavenly Skincare Body Oil"></div>
+        <div class="grid-item"><img src="https://doncosmetics.co/cdn/shop/files/LSP_01.png?v=1713370903&width=823" alt="Don Cosmetics Lip Shine"></div>
+        <div class="grid-item"><img src="https://naturalhair.org/cdn/shop/files/HoneyCurlsCurlStyler12oz-Flat_1024x1024@2x.jpg?v=1745591680" alt="Honey Curls Styler"></div>
+        <div class="grid-item"><img src="https://www.michebeauty.com/cdn/shop/files/IMG-2450.jpg?v=1720587606&width=1800" alt="Miche Beauty Products"></div>
+    </div>
+</section>
+
+<section class="faq-section" id="faq">
+    <h2>Questions? We Have Answers.</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                What is Ilewa? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>ILEWA is a beauty marketplace built for Black-owned brands across the African diaspora. We make it easy to discover, sample, and shop products that actually work for you – all in one place.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                Why should I join the First Access List? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>You’ll get 10% off your first order, an exclusive launch day gift, and early access before the public. Plus, you’ll help shape what brands we add next.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How do First Access referrals work? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>After confirming your email, you’ll receive a personal referral link and dashboard. Verified referrals move you up the list and unlock rewards. Refer 50 verified friends to earn $10 in ILEWA launch credit.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                When will Ilewa launch? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>We’re preparing our first collection of brands and will open access to First Access List members first.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                What kind of brands will I find on Ilewa? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Black-owned brands across the African diaspora – from skincare to makeup to haircare. We curate products you won’t find at Sephora, made for consumers who’ve been ignored by mainstream beauty.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How does the sample selection work? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>We offer curated sample selections for foundation, concealer, and fragrance – categories where getting the right match is hardest. Sample boxes ship with your order so you can try before you commit.</p>
+            </div>
+        </div>
+    </div></section>
+
+<footer>
+    <div class="footer-wrapper">
+        <div class="wavy-border"></div>
+
+        <div class="footer-content">
+            <div class="footer-title">Connect with Us. Stay Updated.</div>
+            
+            <div class="footer-waitlist-cta">
+                 <a href="#cta" class="button-cta">GET FIRST ACCESS</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://ilewaworld.substack.com/" aria-label="Follow us on Substack"><i class="fas fa-newspaper"></i></a>
+                <a href="https://www.linkedin.com/company/ilewa-beauty/" aria-label="Connect with us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/ilewa.world" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@ilewa.world?_t=ZP-90TvcpDI8PG&_r=1" aria-label="Follow us on TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="footer-copyright">&copy; 2026 ILEWA. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // =======================================
+    // --- VERIFIED REFERRAL WAITLIST ---
+    // =======================================
+    const ILEWA_DASHBOARD_TOKEN_KEY = 'ilewa_waitlist_dashboard_token';
+    const ILEWA_REFERRER_KEY = 'ilewa_referrer_code';
+    const ILEWA_REFERRAL_REWARDS = [
+        { referrals: 1, name: 'Founding Member badge' },
+        { referrals: 3, name: 'Priority early access' },
+        { referrals: 5, name: 'First-drop access' },
+        { referrals: 50, name: '$10 launch credit' }
+    ];
+    let ilewaPreparedStory = null;
+
+    function cleanReferralCode(value) {
+        const code = String(value || '').trim().toUpperCase();
+        return /^[A-Z0-9]{6,20}$/.test(code) ? code : '';
+    }
+
+    function getWaitlistAttribution() {
+        const params = new URLSearchParams(window.location.search);
+        const attribution = {};
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(key => {
+            const value = params.get(key);
+            if (value) attribution[key] = value.slice(0, 120);
+        });
+        return attribution;
+    }
+
+    function showWaitlistFeedback(message, type) {
+        const feedback = document.getElementById('waitlist-feedback');
+        feedback.textContent = message;
+        feedback.className = `waitlist-feedback ${type === 'error' ? 'is-error' : 'is-success'}`;
+    }
+
+    function buildReferralLink(code) {
+        const url = new URL('/', window.location.origin);
+        url.searchParams.set('ref', code);
+        return url.toString();
+    }
+
+    function updateReferralRewards(referrals) {
+        document.querySelectorAll('.referral-reward').forEach(reward => {
+            reward.classList.toggle('is-earned', referrals >= Number(reward.dataset.threshold));
+        });
+
+        const upcoming = ILEWA_REFERRAL_REWARDS.find(reward => referrals < reward.referrals);
+        const message = document.getElementById('referral-next-reward');
+        if (upcoming) {
+            const remaining = upcoming.referrals - referrals;
+            message.textContent = `Refer ${remaining} more verified ${remaining === 1 ? 'friend' : 'friends'} to unlock ${upcoming.name}.`;
+        } else {
+            message.textContent = 'You unlocked $10 in ILEWA launch credit.';
+        }
+    }
+
+    async function copyShareText(value) {
+        try {
+            await navigator.clipboard.writeText(value);
+        } catch (error) {
+            const helper = document.createElement('textarea');
+            helper.value = value;
+            helper.setAttribute('readonly', '');
+            helper.style.position = 'fixed';
+            helper.style.opacity = '0';
+            document.body.appendChild(helper);
+            helper.select();
+            document.execCommand('copy');
+            helper.remove();
+        }
+    }
+
+    function drawRoundedRectangle(context, x, y, width, height, radius) {
+        const safeRadius = Math.min(radius, width / 2, height / 2);
+        context.beginPath();
+        context.moveTo(x + safeRadius, y);
+        context.lineTo(x + width - safeRadius, y);
+        context.quadraticCurveTo(x + width, y, x + width, y + safeRadius);
+        context.lineTo(x + width, y + height - safeRadius);
+        context.quadraticCurveTo(x + width, y + height, x + width - safeRadius, y + height);
+        context.lineTo(x + safeRadius, y + height);
+        context.quadraticCurveTo(x, y + height, x, y + height - safeRadius);
+        context.lineTo(x, y + safeRadius);
+        context.quadraticCurveTo(x, y, x + safeRadius, y);
+        context.closePath();
+    }
+
+    function drawStoryLine(context, text, y, font, color) {
+        context.font = font;
+        context.fillStyle = color;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(text, 540, y);
+    }
+
+    async function createInstagramStoryBlob(referralLink, rankPosition) {
+        if (document.fonts) {
+            await Promise.allSettled([
+                document.fonts.load('800 120px Ojuju'),
+                document.fonts.load('700 42px Lato')
+            ]);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 1080;
+        canvas.height = 1920;
+        const context = canvas.getContext('2d');
+        const cream = '#FFFDF9';
+        const burgundy = '#780C28';
+        const leafGreen = '#6E8E59';
+        const paleMint = '#EAFAEA';
+        const softSage = '#CAE0BC';
+        const ink = '#1B1918';
+        const displayLink = referralLink.replace(/^https?:\/\//, '').replace(/\/$/, '');
+        const rankText = rankPosition ? `I’M #${rankPosition} ON THE LIST` : 'I’M ON THE LIST';
+
+        context.fillStyle = cream;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = paleMint;
+        context.beginPath();
+        context.arc(930, 180, 300, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = softSage;
+        context.beginPath();
+        context.arc(70, 1730, 285, 0, Math.PI * 2);
+        context.fill();
+
+        drawStoryLine(context, 'ILEWA', 245, '800 88px Ojuju, sans-serif', burgundy);
+        drawStoryLine(context, 'FIRST ACCESS LIST', 330, '700 30px Lato, sans-serif', leafGreen);
+
+        drawRoundedRectangle(context, 80, 430, 920, 850, 52);
+        context.fillStyle = burgundy;
+        context.fill();
+
+        drawStoryLine(context, rankText, 535, '700 30px Lato, sans-serif', softSage);
+        drawStoryLine(context, 'COME FIND', 720, '800 118px Ojuju, sans-serif', cream);
+        drawStoryLine(context, 'YOUR NEXT', 850, '800 118px Ojuju, sans-serif', cream);
+        drawStoryLine(context, 'BEAUTY', 980, '800 118px Ojuju, sans-serif', cream);
+        drawStoryLine(context, 'OBSESSION.', 1110, '800 118px Ojuju, sans-serif', cream);
+        drawStoryLine(context, 'BEAUTY FROM ACROSS THE AFRICAN DIASPORA.', 1208, '700 27px Lato, sans-serif', softSage);
+
+        drawRoundedRectangle(context, 100, 1355, 880, 235, 34);
+        context.fillStyle = paleMint;
+        context.fill();
+        drawStoryLine(context, 'JOIN ME ON ILEWA', 1435, '800 64px Ojuju, sans-serif', burgundy);
+        drawStoryLine(context, displayLink, 1520, '700 33px Lato, sans-serif', ink);
+
+        drawStoryLine(context, 'ADD THE LINK STICKER TO JOIN', 1690, '700 27px Lato, sans-serif', leafGreen);
+        drawStoryLine(context, '@ilewa.world', 1780, '800 50px Ojuju, sans-serif', burgundy);
+
+        return new Promise((resolve, reject) => {
+            canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('The story image could not be created.')), 'image/png', 1);
+        });
+    }
+
+    function downloadStoryImage(blob, referralLink) {
+        const referralCode = new URL(referralLink).searchParams.get('ref') || 'member';
+        const download = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        download.href = objectUrl;
+        download.download = `ilewa-story-${referralCode.toLowerCase()}.png`;
+        document.body.appendChild(download);
+        download.click();
+        download.remove();
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    }
+
+    function getReferralShareDetails() {
+        const referralLink = document.getElementById('referral-link').value;
+        return {
+            referralLink,
+            shareText: 'Join me on ILEWA, the destination for discovering and shopping beauty from across the African diaspora.'
+        };
+    }
+
+    async function shareToInstagramDM() {
+        const { referralLink, shareText } = getReferralShareDetails();
+        const message = `${shareText}\n\n${referralLink}`;
+        try {
+            if (navigator.share) {
+                showWaitlistFeedback('Choose Instagram, then select who you want to DM.', 'success');
+                await navigator.share({ title: 'Join ILEWA with me', text: shareText, url: referralLink });
+            } else {
+                await copyShareText(message);
+                showWaitlistFeedback('Message copied. Paste it into your Instagram DM.', 'success');
+                window.open('https://www.instagram.com/direct/inbox/', '_blank', 'noopener');
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                await copyShareText(message);
+                showWaitlistFeedback('Message copied. Open Instagram and paste it into a DM.', 'success');
+            }
+        }
+    }
+
+    async function shareInstagramStory() {
+        const { referralLink } = getReferralShareDetails();
+        try {
+            await copyShareText(referralLink);
+            let storyBlob = ilewaPreparedStory ? await ilewaPreparedStory : null;
+            if (!storyBlob) {
+                storyBlob = await createInstagramStoryBlob(referralLink, null);
+            }
+            const storyFile = new File([storyBlob], 'ilewa-first-access-story.png', { type: 'image/png' });
+            showWaitlistFeedback('Story ready and link copied. Choose Instagram, then add the Link sticker and paste.', 'success');
+
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [storyFile] })) {
+                await navigator.share({
+                    files: [storyFile],
+                    title: 'My ILEWA First Access Story',
+                    text: 'My ILEWA referral link is copied. Add it with Instagram’s Link sticker.'
+                });
+            } else {
+                downloadStoryImage(storyBlob, referralLink);
+                window.open('https://www.instagram.com/', '_blank', 'noopener');
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                showWaitlistFeedback('We could not prepare the story. Your referral link is still copied.', 'error');
+            }
+        }
+    }
+
+    async function shareToTikTokOrMore() {
+        const { referralLink, shareText } = getReferralShareDetails();
+        const message = `${shareText}\n\n${referralLink}`;
+        try {
+            if (navigator.share) {
+                showWaitlistFeedback('Choose TikTok or another app from the share menu.', 'success');
+                await navigator.share({ title: 'Join ILEWA with me', text: shareText, url: referralLink });
+            } else {
+                await copyShareText(message);
+                showWaitlistFeedback('Message copied. Open TikTok and paste it into a DM.', 'success');
+                window.open('https://www.tiktok.com/', '_blank', 'noopener');
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                await copyShareText(message);
+                showWaitlistFeedback('Message copied. Paste it into TikTok or another app.', 'success');
+            }
+        }
+    }
+
+    function renderReferralDashboard(status) {
+        const referrals = Number(status.verified_referrals || 0);
+        const referralLink = buildReferralLink(status.referral_code);
+        const shareText = 'Join me on ILEWA, the destination for discovering and shopping beauty from across the African diaspora.';
+
+        document.getElementById('referral-greeting').textContent = status.first_name
+            ? `${String(status.first_name).toUpperCase()}, YOU’RE IN.`
+            : 'YOU’RE IN.';
+        document.getElementById('referral-rank').textContent = status.rank_position ? `#${status.rank_position}` : '–';
+        document.getElementById('referral-count').textContent = referrals;
+        document.getElementById('verified-members').textContent = status.total_verified || '–';
+        document.getElementById('referral-link').value = referralLink;
+        document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${referralLink}`)}`;
+        document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+        document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(referralLink)}`;
+        document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent('Join ILEWA with me')}&body=${encodeURIComponent(`${shareText}\n\n${referralLink}`)}`;
+        ilewaPreparedStory = createInstagramStoryBlob(referralLink, status.rank_position).catch(() => null);
+        updateReferralRewards(referrals);
+
+        document.getElementById('waitlist-form').style.display = 'none';
+        document.getElementById('referral-dashboard').classList.add('is-visible');
+        document.getElementById('referral-dashboard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function loadReferralDashboard(token) {
+        try {
+            const response = await fetch('/api/waitlist/status', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ token })
+            });
+            const body = await response.json();
+            if (!response.ok || !body.ok) throw new Error(body.error || 'We could not load your referral dashboard.');
+            renderReferralDashboard(body.status);
+        } catch (error) {
+            localStorage.removeItem(ILEWA_DASHBOARD_TOKEN_KEY);
+            showWaitlistFeedback(`${error.message} Enter your email again to receive a fresh dashboard link.`, 'error');
+        }
+    }
+
+    async function submitReferralWaitlist(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const submitButton = document.getElementById('waitlist-submit');
+        const formData = new FormData(form);
+        const email = String(formData.get('email') || '').trim();
+        const consent = formData.get('consent') === 'yes';
+
+        if (!email || !email.includes('@')) {
+            showWaitlistFeedback('Enter a valid email address.', 'error');
+            return;
+        }
+        if (!consent) {
+            showWaitlistFeedback('Please agree to receive ILEWA waitlist and launch emails.', 'error');
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'JOINING...';
+
+        try {
+            const response = await fetch('/api/waitlist/signup', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: formData.get('firstName'),
+                    email,
+                    consent,
+                    website: formData.get('website'),
+                    ref: localStorage.getItem(ILEWA_REFERRER_KEY),
+                    source: 'ilewa-homepage',
+                    attribution: getWaitlistAttribution()
+                })
+            });
+            const body = await response.json();
+            if (!response.ok || !body.ok) throw new Error(body.error || 'We could not add you right now.');
+            form.reset();
+            showWaitlistFeedback(body.message || 'Check your email to confirm your place and receive your referral link.', 'success');
+        } catch (error) {
+            showWaitlistFeedback(`${error.message} Please try again shortly.`, 'error');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'GET FIRST ACCESS';
+        }
+    }
+
+    function initializeReferralWaitlist() {
+        const query = new URLSearchParams(window.location.search);
+        const referrer = cleanReferralCode(query.get('ref'));
+        if (referrer) localStorage.setItem(ILEWA_REFERRER_KEY, referrer);
+
+        const hash = new URLSearchParams(window.location.hash.slice(1));
+        const hashToken = hash.get('waitlist');
+        if (hashToken) {
+            localStorage.setItem(ILEWA_DASHBOARD_TOKEN_KEY, hashToken);
+            window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+        }
+
+        const errorCode = query.get('waitlist_error');
+        if (errorCode) {
+            const message = errorCode === 'expired-link'
+                ? 'That confirmation link expired. Enter your email again for a fresh link.'
+                : 'That waitlist link is invalid. Enter your email again for a fresh link.';
+            showWaitlistFeedback(message, 'error');
+        }
+
+        const dashboardToken = hashToken || localStorage.getItem(ILEWA_DASHBOARD_TOKEN_KEY);
+        if (dashboardToken) loadReferralDashboard(dashboardToken);
+
+        document.getElementById('waitlist-form').addEventListener('submit', submitReferralWaitlist);
+        document.getElementById('copy-referral-link').addEventListener('click', async () => {
+            const linkInput = document.getElementById('referral-link');
+            await copyShareText(linkInput.value);
+            showWaitlistFeedback('Referral link copied.', 'success');
+        });
+        document.getElementById('share-instagram-dm').addEventListener('click', shareToInstagramDM);
+        document.getElementById('share-instagram-story').addEventListener('click', shareInstagramStory);
+        document.getElementById('share-tiktok').addEventListener('click', shareToTikTokOrMore);
+    }
+
+    initializeReferralWaitlist();
+
+    // =======================================
+    // --- JAVASCRIPT FOR GAME MANAGEMENT ---
+    // =======================================
+    function showGame(which){
+        // Ensure only the selected game is shown
+        document.getElementById('mirror-test').style.display = which==='mirror' ? 'block' : 'none';
+        document.getElementById('guess-the-brand').style.display = which==='guess' ? 'block' : 'none';
+        
+        // When switching, scroll to the quiz section
+        document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Redirect to CTA section
+    function joinWaitlist(){
+        window.location.href='#cta';
+    }
+
+    // =======================================
+    // --- JAVASCRIPT FOR MIRROR TEST (Archetype Quiz) ---
+    // =======================================
+    const mirrorQuiz = {
+        step: 0,
+        scores: {glow_getter:0, nurturer:0, dreamer:0, creator:0},
+        questions: [
+            { text: "What is your morning ritual like?", options: [
+                {label:"A slow start with soft music and skincare", archetype:"glow_getter"},
+                {label:"Quick and focused, I like efficiency", archetype:"creator"},
+                {label:"I journal or pray before anything else", archetype:"nurturer"},
+                {label:"I go with the flow and figure it out", archetype:"dreamer"} ]},
+            { text: "What color feels most like you today?", options: [
+                {label:"Honey gold", archetype:"glow_getter"},
+                {label:"Deep berry", archetype:"creator"},
+                {label:"Soft rose", archetype:"nurturer"},
+                {label:"Fresh green", archetype:"dreamer"} ]},
+            { text: "How do you like to unwind?", options: [
+                {label:"A face mask and a good playlist", archetype:"glow_getter"},
+                {label:"Cooking or trying something new", archetype:"creator"},
+                {label:"Calling someone I love", archetype:"nurturer"},
+                {label:"A long walk or quiet time", archetype:"dreamer"} ]},
+            { text: "Pick a word that feels closest to your beauty:", options: [
+                {label:"Radiant", archetype:"glow_getter"},
+                {label:"Grounded", archetype:"creator"},
+                {label:"Expressive", archetype:"nurturer"},
+                {label:"Gentle", archetype:"dreamer"} ]},
+            { text: "What does beauty mean to you?", options: [
+                {label:"Feeling confident in my skin", archetype:"glow_getter"},
+                {label:"Caring for myself and others", archetype:"nurturer"},
+                {label:"Expressing who I am", archetype:"creator"},
+                {label:"Finding peace in small moments", archetype:"dreamer"} ]}
+        ],
+        archetypes: {
+            glow_getter:{ name:"The Glow Getter", desc:"You shine through balance. You like to feel fresh, put together, and radiant from within. Your routine is a ritual, not a race. You need products that enhance natural light and flow."},
+            nurturer:{ name:"The Nurturer", desc:"You find beauty in softness and care. You pour love into others and yourself. You create warmth wherever you go. Your ideal products are soothing, comforting, and deeply nourishing."},
+            dreamer:{ name:"The Dreamer", desc:"Your beauty is creative and emotional. You find joy in trying new looks and turning moments into memories. You need vibrant colors and inspiring scents that change with your mood."},
+            creator:{ name:"The Creator", desc:"You are bold and intentional. You like control in your craft and clarity in your look. Simplicity and substance work well for you. Your routine is minimalist but high-impact."}
+        }
+    };
+
+    function startMirrorTest(){
+        mirrorQuiz.step = 0;
+        mirrorQuiz.scores = {glow_getter:0, nurturer:0, dreamer:0, creator:0}; // Reset scores
+        document.getElementById('mirror-intro').style.display='none';
+        document.getElementById('mirror-result').style.display='none';
+        document.getElementById('mirror-question').style.display='block';
+        renderMirrorQuestion();
+    }
+
+    function renderMirrorQuestion(){
+        const q = mirrorQuiz.questions[mirrorQuiz.step];
+        // Fade out and in for transition effect
+        const questionScreen = document.getElementById('mirror-question');
+        questionScreen.style.opacity = '0';
+        
+        setTimeout(() => {
+            document.getElementById('mirror-question-text').textContent = q.text;
+            const container = document.getElementById('mirror-options');
+            container.innerHTML = '';
+            
+            q.options.forEach((opt,i)=>{
+                const label = document.createElement('label');
+                label.className='option';
+                const input = document.createElement('input');
+                input.type='radio';
+                input.name='mirror';
+                input.value=opt.archetype;
+                label.appendChild(input);
+                label.appendChild(document.createElement('span')).textContent = opt.label; // Wrap text in span
+                container.appendChild(label);
+            });
+            
+            questionScreen.style.opacity = '1';
+        }, 300);
+    }
+
+    function nextMirrorQuestion(){
+        const selected = document.querySelector('input[name="mirror"]:checked');
+        if(!selected){ alert("Please select an option."); return; }
+        
+        // Add score before moving to next step
+        mirrorQuiz.scores[selected.value]++;
+        mirrorQuiz.step++;
+        
+        if(mirrorQuiz.step < mirrorQuiz.questions.length){
+            renderMirrorQuestion();
+        } else {
+            showMirrorResult();
+        }
+    }
+
+    function showMirrorResult(){
+        document.getElementById('mirror-question').style.display='none';
+        
+        // Determine the winning archetype
+        const winner = Object.entries(mirrorQuiz.scores).sort((a,b)=>b[1]-a[1])[0][0];
+        const arc = mirrorQuiz.archetypes[winner];
+        
+        // Populate results
+        document.getElementById('mirror-result-title').textContent = arc.name;
+        document.getElementById('mirror-result-desc').textContent = arc.desc;
+        
+        // Display result screen with fade-in
+        const resultScreen = document.getElementById('mirror-result');
+        resultScreen.style.opacity = '0';
+        resultScreen.style.display='block';
+        setTimeout(() => {
+             resultScreen.style.opacity = '1';
+        }, 100);
+    }
+    
+    // =======================================
+    // --- JAVASCRIPT FOR GUESS THE BRAND (Secondary Game) ---
+    // =======================================
+    const brands = [
+        {name:"Ami Colé", aliases:["ami cole","amicole"], desc:"Created by Diarrha Ndiaye Mbaye, Ami Colé celebrates melanin rich beauty with skin first essentials.", hints:[
+            "Known for glowing skin and clean, minimal design.",
+            "The founder started after struggling to find products for deep skin tones.",
+            "A tinted skin product became a cult favorite.",
+        ]},
+        {name:"Hanahana Beauty", aliases:["hanahana"], desc:"Hanahana Beauty is a body care brand that sources with care and supports women led cooperatives.", hints:[
+            "Shea butter sits at the heart of the line.",
+            "Rooted in community care and fair sourcing.",
+            "Strong connection to Ghana.",
+        ]},
+        {name:"54 Thrones", aliases:["54thrones","fifty four thrones"], desc:"54 Thrones crafts luxury skincare that honors African ingredients and artisans.", hints:[
+            "Inspired by a continent with many nations.",
+            "Luxury skincare with heritage ingredients.",
+            "Rich butters and oils are common.",
+        ]}
+    ];
+
+    let gtbState = {};
+    const MAX_ATTEMPTS = 3; // Max attempts to guess the brand
+
+    function getTodayBrand(){
+        // Simple day-based rotation
+        const idx = Math.floor(Date.now() / 86400000) % brands.length;
+        return brands[idx];
+    }
+
+    function startGTB(){
+        gtbState = { brand:getTodayBrand(), hintIndex:0, attempts:0 };
+        document.getElementById('gtb-intro').style.display='none';
+        document.getElementById('gtb-result').style.display='none';
+        document.getElementById('gtb-play').style.display='block';
+        renderHint();
+    }
+
+    function renderHint(){
+        const hint = gtbState.brand.hints[gtbState.hintIndex];
+        document.getElementById('gtb-hint').textContent = "Hint " + (gtbState.hintIndex+1) + " of " + gtbState.brand.hints.length + ": " + hint;
+        document.getElementById('gtb-feedback').textContent=`Attempts left: ${MAX_ATTEMPTS - gtbState.attempts}`;
+        document.getElementById('gtb-input').value='';
+    }
+
+    function nextHint(){
+        if(gtbState.hintIndex < gtbState.brand.hints.length-1){
+            gtbState.hintIndex++;
+            renderHint();
+        } else {
+            showCustomModal("No more hints!", "You've revealed all hints. Make your best guess!");
+        }
+    }
+
+    function normalize(str){ return str.toLowerCase().replace(/[^a-z0-9]/g,''); }
+
+    function submitGTB(){
+        const val = normalize(document.getElementById('gtb-input').value);
+        if(!val){ return; }
+        
+        const pool = [gtbState.brand.name].concat(gtbState.brand.aliases||[]).map(normalize);
+        if(pool.includes(val)){
+            showGTBResult(true);
+        } else {
+            gtbState.attempts++;
+            if(gtbState.attempts >= MAX_ATTEMPTS){
+                showCustomModal("Game Over!", `You've used all ${MAX_ATTEMPTS} attempts. The brand was ${gtbState.brand.name}.`);
+                showGTBResult(false); // Directly show the result as lost
+            } else {
+                document.getElementById('gtb-feedback').textContent = `Incorrect! Attempts left: ${MAX_ATTEMPTS - gtbState.attempts}`;
+            }
+        }
+    }
+
+    function showGTBResult(win){
+        document.getElementById('gtb-play').style.display='none';
+        const head = document.getElementById('gtb-result-heading');
+        const desc = document.getElementById('gtb-result-desc');
+        if(win){
+            head.textContent = "You got it!";
+            desc.textContent = "The brand is " + gtbState.brand.name + ". " + gtbState.brand.desc;
+        } else {
+            head.textContent = "Better luck next time!"; // Changed message for clarity
+            desc.textContent = `The brand was ${gtbState.brand.name}. There are many stories worth knowing. Come find more inside Ilewa.`;
+        }
+        document.getElementById('gtb-result').style.display='block';
+    }
+
+    // =======================================
+    // --- JAVASCRIPT FOR CUSTOM MODAL ---
+    // =======================================
+    const customModal = document.getElementById('customModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButton = document.getElementById('modalButton');
+
+    function showCustomModal(title, message) {
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+        customModal.classList.add('active');
+        // Optional: Close modal on button click
+        modalButton.onclick = function() {
+            customModal.classList.remove('active');
+            // If the modal is shown due to game over, we might want to reset the game here as well
+            if (title === "Game Over!") {
+                 // For now, we'll let the user manually click "Play Again"
+                 // If you want it to automatically reset, call startGTB() here.
+            }
+        };
+    }
+
+    // =======================================
+    // --- JAVASCRIPT FOR FAQ ACCORDION ---
+    // =======================================
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const wasActive = item.classList.contains('active');
+            
+            // Close all open items
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+
+            // Open the clicked item if it wasn't already active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // =======================================
+    // --- JAVASCRIPT FOR SCROLL EFFECTS ---
+    // =======================================
+    const navbar = document.getElementById('navbar');
+    const heroSection = document.querySelector('.hero-section');
+    let heroHeight = 0; 
+
+    // Calculate height on load and resize
+    function calculateHeroHeight() {
+        heroHeight = heroSection.offsetHeight;
+    }
+    
+    calculateHeroHeight();
+    window.addEventListener('resize', calculateHeroHeight);
+
+    function handleScroll() {
+        const scrollPosition = window.scrollY;
+        
+        // 1. Sticky Header / ILEWA Logo Effect
+        if (scrollPosition > heroHeight - navbar.offsetHeight) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+</script>
+
+</body>
+</html>
