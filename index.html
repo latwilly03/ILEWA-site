@@ -15,7 +15,98 @@
 <!-- Web manifest (optional, for PWA support) -->
   <link rel="manifest" href="site.webmanifest">
 
-    <title>ILEWA | The Future of Beauty Retail</title>
+    <title>ILEWA | Black-Owned Beauty &amp; Fashion Marketplace</title>
+    <meta name="description" content="Discover Black-owned beauty and fashion brands from Africa and the global Black diaspora. Join ILEWA First Access and shop what’s next, first." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="ILEWA" />
+    <meta name="theme-color" content="#780C28" />
+    <link rel="canonical" href="https://ilewa.world/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ILEWA" />
+    <meta property="og:url" content="https://ilewa.world/" />
+    <meta property="og:title" content="ILEWA | Discover the Diaspora. Shop What’s Next." />
+    <meta property="og:description" content="A curated marketplace for Black-owned beauty and fashion brands across Africa and the global Black diaspora." />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ILEWA | Discover the Diaspora. Shop What’s Next." />
+    <meta name="twitter:description" content="Discover Black-owned beauty and fashion brands before the rest of the world catches up." />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ilewa.world/#organization",
+          "name": "ILEWA",
+          "url": "https://ilewa.world/",
+          "description": "ILEWA is a curated marketplace and discovery platform for Black-owned beauty and fashion brands across Africa and the global Black diaspora.",
+          "sameAs": [
+            "https://www.instagram.com/ilewa.world",
+            "https://www.tiktok.com/@ilewa.world",
+            "https://www.linkedin.com/company/ilewa-beauty/",
+            "https://ilewaworld.substack.com/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ilewa.world/#website",
+          "url": "https://ilewa.world/",
+          "name": "ILEWA",
+          "description": "Discover what’s next in Black-owned beauty and fashion across the global Black diaspora.",
+          "publisher": { "@id": "https://ilewa.world/#organization" },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ilewa.world/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is ILEWA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ILEWA is a curated marketplace and discovery platform for Black-owned beauty and fashion brands across Africa and the global Black diaspora."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is ILEWA for?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ILEWA is for style-conscious shoppers who want to discover the brands shaping Black beauty and style before the rest of the world catches up."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What kind of brands will I find on ILEWA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ILEWA curates Black-owned skincare, makeup, fragrance, hair care, handbags, accessories, and fashion brands from the United States, Africa, and the global Black diaspora."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why should I join ILEWA First Access?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "First Access members discover brands early, receive launch updates, help shape the marketplace, and unlock rewards through verified referrals."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When will ILEWA launch?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ILEWA is preparing a limited spring and summer 2027 test, followed by a broader fall 2027 launch. First Access members will be invited first."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Ojuju:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -204,25 +295,516 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            padding: 90px 40px 50px;
+            box-sizing: border-box;
+            background:
+                radial-gradient(circle at 80% 18%, rgba(202, 224, 188, 0.9), transparent 32%),
+                linear-gradient(145deg, #780C28 0%, #5f0920 100%);
         }
 
-        .hero-right img {
+        /* --- Animated ILEWA shopping journey --- */
+        .shopping-demo {
+            width: min(100%, 610px);
+            position: relative;
+            z-index: 1;
+        }
+        .demo-browser {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 28px 70px rgba(31, 2, 12, 0.38);
+            transform: rotate(1deg);
         }
-
-        /* Image Overlay */
-        .image-overlay {
+        .demo-chrome {
+            min-height: 44px;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            padding: 8px 12px 0;
+            background: #f1eadf;
+            border-bottom: 1px solid #ded6ca;
+        }
+        .demo-dots {
+            display: flex;
+            gap: 5px;
+            padding-bottom: 13px;
+            flex: 0 0 auto;
+        }
+        .demo-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--mid-green);
+        }
+        .demo-dot:first-child { background: #b9344e; }
+        .demo-dot:nth-child(2) { background: #d8aa57; }
+        .demo-dot:nth-child(3) { background: #6E8E59; }
+        .demo-tabs {
+            min-width: 0;
+            display: flex;
+            gap: 4px;
+            overflow: hidden;
+        }
+        .demo-tab {
+            width: 106px;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 8px 10px;
+            border-radius: 7px 7px 0 0;
+            background: #ddd5c9;
+            color: #504b45;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .25px;
+            box-sizing: border-box;
+            transform-origin: left bottom;
+        }
+        .demo-tab:last-child {
+            background: #ffffff;
+            color: var(--brand-red);
+        }
+        .demo-tab-one { animation: demoCloseTabOne 15s ease-in-out infinite; }
+        .demo-tab-two { animation: demoCloseTabTwo 15s ease-in-out infinite; }
+        .demo-tab-three { animation: demoCloseTabThree 15s ease-in-out infinite; }
+        .demo-address {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            background: #faf7f2;
+            border-bottom: 1px solid #e9e2d8;
+        }
+        .demo-address-bar {
+            width: 100%;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 10px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #ebe6de;
+            color: #59544d;
+            font-size: 10px;
+            box-sizing: border-box;
+        }
+        .demo-lock {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dark-green);
+            flex: 0 0 auto;
+        }
+        .demo-url {
+            display: inline-block;
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            color: var(--brand-red);
+            font-weight: 700;
+            animation: demoTypeUrl 15s steps(11, end) infinite;
+        }
+        .demo-cursor {
+            width: 1px;
+            height: 12px;
+            background: var(--brand-red);
+            animation: demoCursorBlink .75s step-end infinite;
+        }
+        .demo-screen {
+            position: relative;
+            aspect-ratio: 1.32 / 1;
+            overflow: hidden;
+            background: var(--light-green);
+        }
+        .demo-chaos,
+        .demo-store,
+        .demo-checkout,
+        .demo-endcard {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--overlay-green-rgba); /* Green overlay with 0.5 opacity */
+            inset: 0;
         }
-        
+        .demo-chaos {
+            padding: 26px;
+            background: #efe8de;
+            animation: demoChaosStage 15s ease-in-out infinite;
+        }
+        .demo-chaos-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 4;
+            width: 74%;
+            transform: translate(-50%, -50%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: rgba(120,12,40,.94);
+            color: #ffffff;
+            font-family: 'Ojuju', sans-serif;
+            font-size: clamp(16px, 2.1vw, 27px);
+            font-weight: 800;
+            letter-spacing: .6px;
+            line-height: 1.05;
+            text-align: center;
+            text-transform: uppercase;
+            box-shadow: 0 12px 25px rgba(49,4,17,.22);
+        }
+        .demo-mini-window {
+            position: absolute;
+            width: 46%;
+            height: 44%;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 10px 22px rgba(44,62,46,.16);
+        }
+        .demo-mini-window::before {
+            content: '';
+            display: block;
+            height: 10px;
+            background: #e5ded4;
+        }
+        .demo-mini-window strong {
+            display: block;
+            padding: 10px 9px 3px;
+            color: var(--brand-red);
+            font-size: 8px;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+        }
+        .demo-mini-window span {
+            display: block;
+            width: 68%;
+            height: 44%;
+            margin: 2px auto;
+            border-radius: 50% 50% 12px 12px;
+            background: var(--mid-green);
+        }
+        .demo-mini-one { left: 7%; top: 9%; transform: rotate(-4deg); }
+        .demo-mini-two { right: 6%; top: 13%; transform: rotate(4deg); }
+        .demo-mini-three { left: 27%; bottom: 6%; transform: rotate(-1deg); }
+        .demo-mini-three span { border-radius: 12px; background: linear-gradient(135deg, #c05b75, #780C28); }
+        .demo-store {
+            opacity: 0;
+            background: #ffffff;
+            animation: demoStoreStage 15s ease-in-out infinite;
+        }
+        .demo-store-nav {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            background: var(--brand-red);
+            color: #ffffff;
+        }
+        .demo-store-logo {
+            font-family: 'Ojuju', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .demo-store-nav small {
+            color: var(--mid-green);
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .demo-cart {
+            position: relative;
+            width: 26px;
+            height: 26px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 50%;
+            font-size: 11px;
+        }
+        .demo-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -4px;
+            width: 14px;
+            height: 14px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--mid-green);
+            color: var(--brand-red);
+            font-size: 8px;
+            font-weight: 700;
+        }
+        .demo-cart-count::after {
+            content: '0';
+            animation: demoCartCount 15s steps(1, end) infinite;
+        }
+        .demo-scroll {
+            padding: 20px 18px 28px;
+            animation: demoShopScroll 15s ease-in-out infinite;
+        }
+        .demo-store-kicker {
+            margin: 0;
+            color: var(--dark-green);
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+        .demo-store-title {
+            margin: 3px 0 14px;
+            color: var(--brand-red);
+            font-family: 'Ojuju', sans-serif;
+            font-size: clamp(18px, 2.2vw, 29px);
+            font-weight: 800;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .demo-products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+        }
+        .demo-product {
+            position: relative;
+            min-width: 0;
+            padding: 8px;
+            border: 1px solid var(--mid-green);
+            border-radius: 8px;
+            background: var(--light-green);
+        }
+        .demo-product-art {
+            height: 70px;
+            display: grid;
+            place-items: end center;
+            margin-bottom: 7px;
+            overflow: hidden;
+            border-radius: 5px;
+            background: #ffffff;
+        }
+        .demo-product-art::before {
+            content: '';
+            display: block;
+            width: 52%;
+            height: 66%;
+            margin-bottom: 8px;
+            border-radius: 28% 28% 8px 8px;
+            background: var(--brand-red);
+            box-shadow: inset 0 0 0 5px rgba(255,255,255,.18);
+        }
+        .demo-product:nth-child(2) .demo-product-art::before {
+            width: 29%;
+            height: 72%;
+            border-radius: 4px 4px 12px 12px;
+            background: var(--dark-green);
+        }
+        .demo-product:nth-child(3) .demo-product-art::before {
+            width: 45%;
+            height: 52%;
+            border-radius: 50% 50% 8px 8px;
+            background: #d29b68;
+        }
+        .demo-product small {
+            display: block;
+            color: var(--dark-green);
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+        }
+        .demo-product strong {
+            display: block;
+            overflow: hidden;
+            color: var(--dark-text);
+            font-size: 8px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .demo-add {
+            display: block;
+            margin-top: 7px;
+            padding: 5px 3px;
+            border-radius: 4px;
+            background: var(--brand-red);
+            color: #ffffff;
+            font-size: 6px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: .5px;
+        }
+        .demo-added {
+            position: absolute;
+            inset: 5px;
+            display: grid;
+            place-items: center;
+            border-radius: 6px;
+            background: rgba(110,142,89,.92);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            opacity: 0;
+        }
+        .demo-product:nth-child(1) .demo-added { animation: demoAddOne 15s ease infinite; }
+        .demo-product:nth-child(2) .demo-added { animation: demoAddTwo 15s ease infinite; }
+        .demo-product:nth-child(3) .demo-added { animation: demoAddThree 15s ease infinite; }
+        .demo-checkout {
+            display: grid;
+            place-items: center;
+            padding: 28px;
+            opacity: 0;
+            background: var(--light-green);
+            animation: demoCheckoutStage 15s ease-in-out infinite;
+        }
+        .demo-checkout-card {
+            width: min(82%, 360px);
+            padding: 24px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 14px 36px rgba(44,62,46,.16);
+            text-align: center;
+        }
+        .demo-checkout-card small {
+            color: var(--dark-green);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+        .demo-checkout-card strong {
+            display: block;
+            margin: 5px 0 14px;
+            color: var(--brand-red);
+            font-family: 'Ojuju', sans-serif;
+            font-size: clamp(21px, 2.6vw, 34px);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .demo-checkout-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid #e8e2da;
+            color: var(--dark-text);
+            font-size: 8px;
+            font-weight: 700;
+        }
+        .demo-checkout-button {
+            margin-top: 15px;
+            padding: 9px;
+            border-radius: 5px;
+            background: var(--brand-red);
+            color: #ffffff;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .demo-endcard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            opacity: 0;
+            background: var(--brand-red);
+            color: #ffffff;
+            text-align: center;
+            animation: demoEndStage 15s ease-in-out infinite;
+        }
+        .demo-end-logo {
+            margin-bottom: 16px;
+            color: var(--mid-green);
+            font-family: 'Ojuju', sans-serif;
+            font-size: clamp(30px, 4.8vw, 62px);
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+        .demo-endcard strong,
+        .demo-endcard span,
+        .demo-endcard em {
+            display: block;
+            font-family: 'Ojuju', sans-serif;
+            font-size: clamp(20px, 3vw, 38px);
+            font-style: normal;
+            font-weight: 800;
+            line-height: 1.03;
+            text-transform: uppercase;
+        }
+        .demo-endcard span { color: var(--mid-green); }
+        .demo-endcard em { margin-top: 8px; font-size: clamp(14px, 1.7vw, 22px); letter-spacing: 3px; }
+        .demo-caption {
+            margin: 12px 0 0;
+            color: rgba(255,255,255,.82);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        @keyframes demoCloseTabOne {
+            0%, 5% { width: 106px; padding: 8px 10px; opacity: 1; transform: scale(1); }
+            11%, 100% { width: 0; padding: 8px 0; opacity: 0; transform: scale(.7); }
+        }
+        @keyframes demoCloseTabTwo {
+            0%, 10% { width: 106px; padding: 8px 10px; opacity: 1; transform: scale(1); }
+            16%, 100% { width: 0; padding: 8px 0; opacity: 0; transform: scale(.7); }
+        }
+        @keyframes demoCloseTabThree {
+            0%, 15% { width: 106px; padding: 8px 10px; opacity: 1; transform: scale(1); }
+            21%, 100% { width: 0; padding: 8px 0; opacity: 0; transform: scale(.7); }
+        }
+        @keyframes demoTypeUrl {
+            0%, 18% { width: 0; }
+            29%, 96% { width: 11ch; }
+            100% { width: 0; }
+        }
+        @keyframes demoCursorBlink { 50% { opacity: 0; } }
+        @keyframes demoChaosStage {
+            0%, 22% { opacity: 1; transform: scale(1); }
+            29%, 100% { opacity: 0; transform: scale(.97); pointer-events: none; }
+        }
+        @keyframes demoStoreStage {
+            0%, 25% { opacity: 0; transform: translateY(8px); }
+            31%, 66% { opacity: 1; transform: translateY(0); }
+            72%, 100% { opacity: 0; transform: translateY(-4px); }
+        }
+        @keyframes demoShopScroll {
+            0%, 32% { transform: translateY(10px); }
+            40%, 58% { transform: translateY(0); }
+            65%, 100% { transform: translateY(-8px); }
+        }
+        @keyframes demoAddOne {
+            0%, 39%, 45%, 100% { opacity: 0; transform: scale(.92); }
+            41%, 43% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes demoAddTwo {
+            0%, 47%, 53%, 100% { opacity: 0; transform: scale(.92); }
+            49%, 51% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes demoAddThree {
+            0%, 55%, 61%, 100% { opacity: 0; transform: scale(.92); }
+            57%, 59% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes demoCartCount {
+            0%, 40% { content: '0'; }
+            41%, 48% { content: '1'; }
+            49%, 56% { content: '2'; }
+            57%, 100% { content: '3'; }
+        }
+        @keyframes demoCheckoutStage {
+            0%, 67% { opacity: 0; transform: scale(.98); pointer-events: none; }
+            72%, 81% { opacity: 1; transform: scale(1); }
+            86%, 100% { opacity: 0; transform: scale(.98); pointer-events: none; }
+        }
+        @keyframes demoEndStage {
+            0%, 82% { opacity: 0; transform: scale(1.03); pointer-events: none; }
+            87%, 97% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
         /* New Styles for hero section typography */
         .hero-brand-logo {
             font-family: 'Ojuju', sans-serif; /* Back to Ojuju */
@@ -235,6 +817,14 @@
             transform: translateY(30px);
             transition: opacity 1s ease-out 0.2s, transform 1s ease-out 0.2s;
             letter-spacing: 5px;
+        }
+        .hero-eyebrow {
+            margin: 0 0 10px;
+            color: var(--brand-red);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         .hero-title-tagline {
             font-family: 'Lato', sans-serif; /* Changed to Lato */
@@ -257,7 +847,7 @@
             font-weight: 400;
             color: var(--dark-text);
             margin-bottom: 12px;
-            max-width: 500px;
+            max-width: 650px;
         }
 
         .hero-incentive-text {
@@ -294,6 +884,31 @@
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .demo-tab-one,
+            .demo-tab-two,
+            .demo-tab-three,
+            .demo-url,
+            .demo-cursor,
+            .demo-chaos,
+            .demo-store,
+            .demo-scroll,
+            .demo-added,
+            .demo-checkout,
+            .demo-endcard {
+                animation: none !important;
+            }
+            .demo-tab-one,
+            .demo-tab-two,
+            .demo-tab-three,
+            .demo-chaos,
+            .demo-checkout,
+            .demo-endcard { display: none; }
+            .demo-url { width: 11ch; }
+            .demo-store { opacity: 1; }
+            .demo-cart-count::after { content: '3'; animation: none !important; }
+        }
+
         /* ======================================= */
         /* --- ABOUT SECTION --- */
         /* ======================================= */
@@ -328,6 +943,58 @@
             color: var(--brand-red); /* Changed to red */
         }
         /* Removed .about-image-container to remove the image entirely */
+
+        /* ======================================= */
+        /* --- POSITIONING / WHY ILEWA SECTION --- */
+        /* ======================================= */
+        .positioning-section {
+            padding: 100px 40px;
+            background-color: var(--light-green);
+            text-align: center;
+        }
+        .positioning-kicker {
+            margin: 0 0 10px;
+            color: var(--dark-green);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .positioning-section h2 {
+            margin: 0 0 45px;
+            color: var(--brand-red);
+            font-size: 54px;
+        }
+        .positioning-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .positioning-card {
+            padding: 34px 28px;
+            background: var(--white);
+            border: 1px solid var(--mid-green);
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 10px 25px rgba(44, 62, 46, 0.06);
+        }
+        .positioning-card h3 {
+            margin: 0 0 12px;
+            color: var(--brand-red);
+            font-size: 27px;
+        }
+        .positioning-card p {
+            margin: 0;
+            font-size: 17px;
+        }
+        .positioning-close {
+            max-width: 780px;
+            margin: 42px auto 0;
+            color: var(--brand-red);
+            font-size: 22px;
+            font-weight: 700;
+        }
         
         /* ======================================= */
         /* --- QUIZ/GAME SECTION (NEW STYLES) --- */
@@ -646,7 +1313,7 @@
         .referral-dashboard > p { margin: 0 0 20px; font-size: 16px; }
         .referral-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin: 20px 0;
         }
@@ -722,168 +1389,6 @@
         .referral-reward strong { display: block; color: var(--brand-red); }
         .referral-reward span { font-size: 12px; }
         .referral-next-reward { margin: 16px 0 0 !important; color: var(--brand-red); font-weight: 700; }
-
-        /* ======================================= */
-        /* --- GUIDED INSTAGRAM STORY FLOW --- */
-        /* ======================================= */
-        body.ilewa-modal-open { overflow: hidden; }
-        .instagram-guide {
-            position: fixed;
-            inset: 0;
-            z-index: 3000;
-            display: none;
-            place-items: center;
-            padding: 18px;
-            overflow-y: auto;
-            background: rgba(27, 25, 24, 0.78);
-            backdrop-filter: blur(6px);
-        }
-        .instagram-guide.is-visible { display: grid; }
-        .instagram-guide-panel {
-            position: relative;
-            display: grid;
-            grid-template-columns: minmax(210px, 0.72fr) minmax(300px, 1.28fr);
-            gap: 28px;
-            width: min(920px, 100%);
-            padding: 28px;
-            border: 2px solid var(--mid-green);
-            border-radius: 18px;
-            background: var(--white);
-            color: var(--dark-text);
-            box-shadow: 0 24px 70px rgba(0,0,0,0.35);
-        }
-        .instagram-guide-preview {
-            display: grid;
-            place-items: center;
-            min-height: 430px;
-            padding: 14px;
-            border-radius: 13px;
-            background: var(--light-green);
-        }
-        .instagram-guide-preview img {
-            display: none;
-            width: auto;
-            max-width: 100%;
-            max-height: 520px;
-            aspect-ratio: 9 / 16;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-        }
-        .instagram-guide-preview img.is-ready { display: block; }
-        .instagram-guide-loading {
-            margin: 0;
-            color: var(--brand-red);
-            font-weight: 700;
-            text-align: center;
-        }
-        .instagram-guide-copy { align-self: center; }
-        .instagram-guide-eyebrow {
-            margin: 0 0 4px;
-            color: var(--dark-green);
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-        }
-        .instagram-guide h3 {
-            margin: 0 42px 10px 0;
-            color: var(--brand-red);
-            font-size: clamp(32px, 5vw, 48px);
-            text-transform: uppercase;
-        }
-        .instagram-guide-intro { margin: 0 0 20px; }
-        .instagram-guide-steps {
-            display: grid;
-            gap: 12px;
-            margin: 0 0 20px;
-            padding: 0;
-            list-style: none;
-            counter-reset: instagram-step;
-        }
-        .instagram-guide-steps li {
-            position: relative;
-            min-height: 38px;
-            padding-left: 50px;
-            line-height: 1.4;
-            counter-increment: instagram-step;
-        }
-        .instagram-guide-steps li::before {
-            content: counter(instagram-step);
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: grid;
-            place-items: center;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: var(--brand-red);
-            color: var(--white);
-            font-family: 'Ojuju', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-        }
-        .instagram-guide-actions {
-            display: grid;
-            gap: 10px;
-        }
-        .instagram-guide-actions button {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--brand-red);
-            border-radius: 7px;
-            background: var(--brand-red);
-            color: var(--white);
-            font: 700 14px 'Lato', sans-serif;
-            letter-spacing: .7px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-        .instagram-guide-actions button:disabled {
-            cursor: wait;
-            opacity: .55;
-        }
-        .instagram-guide-actions .instagram-guide-secondary {
-            background: var(--white);
-            color: var(--brand-red);
-        }
-        .instagram-guide-status {
-            min-height: 22px;
-            margin: 12px 0 0;
-            color: var(--dark-green);
-            font-size: 13px;
-            font-weight: 700;
-        }
-        .instagram-guide-close {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            display: grid;
-            place-items: center;
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            border: 0;
-            border-radius: 50%;
-            background: var(--light-green);
-            color: var(--brand-red);
-            font-size: 25px;
-            cursor: pointer;
-        }
-        @media (max-width: 720px) {
-            .instagram-guide { place-items: start center; padding: 10px; }
-            .instagram-guide-panel {
-                grid-template-columns: 1fr;
-                gap: 18px;
-                margin: 10px 0;
-                padding: 20px;
-                border-radius: 14px;
-            }
-            .instagram-guide-preview { min-height: 0; padding: 10px; }
-            .instagram-guide-preview img { max-height: 330px; }
-            .instagram-guide h3 { margin-right: 36px; }
-        }
 
         /* ======================================= */
         /* --- IMAGE GRID SECTION (Carousel Animation) --- */
@@ -1093,7 +1598,8 @@
             .hero-left, .hero-right { padding: 80px 40px; }
             .hero-brand-logo { font-size: 15vw; }
             .hero-title-tagline { font-size: 5vw; }
-            .hero-right { height: 400px; }
+            .hero-right { height: auto; min-height: 640px; }
+            .shopping-demo { max-width: 520px; }
             .about-section h2, .grid-header, .faq-section h2, .footer-title { font-size: 42px; }
             .faq-question { font-size: 20px; }
             .game-container { padding: 40px; max-width: 800px; } /* Adjust game container for medium screens */
@@ -1102,6 +1608,9 @@
              .nav-link { font-size: 13px; padding: 5px 8px; }
              .nav-partner-link { font-size: 13px; margin-right: 10px; padding: 5px 10px; }
              .game-container { padding: 30px; max-width: 100%; margin: 0 20px; } /* Adjust game container for small screens */
+             .positioning-grid { grid-template-columns: 1fr; }
+             .positioning-section { padding: 70px 20px; }
+             .positioning-section h2 { font-size: 38px; }
         }
         @media (max-width: 600px) {
             .navbar { padding: 10px 20px; }
@@ -1176,24 +1685,22 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
-    background-image: url("https://mapaon.com/wp-content/uploads/2024/10/IMG_3015-scaled.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #ffffff;
+    background: var(--light-green);
+    color: var(--dark-text);
     overflow: hidden;
   }
 
-  /* Remove the right image element and green overlay entirely on mobile */
-  .hero-right { display: none; }
+  .hero-right {
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 32px 16px 48px;
+    background: linear-gradient(145deg, #780C28 0%, #5f0920 100%);
+  }
 
-  /* Slight dark overlay for legibility */
   .hero-section::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.45);
-    z-index: 0;
+    display: none;
   }
 
   .hero-left {
@@ -1205,13 +1712,19 @@
 
   .hero-brand-logo {
     font-size: 22vw;
-    color: #ffffff;
+    color: var(--brand-red);
     text-align: center;
     margin: 0 0 15px;
   }
 
+  .hero-eyebrow {
+    color: var(--dark-green);
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
   .hero-title-tagline {
-    color: #EAFAEA;
+    color: var(--dark-green);
     font-size: 6vw;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -1219,12 +1732,29 @@
   }
 
   .hero-tagline-long {
-    color: #ffffff;
+    color: var(--dark-text);
     font-size: 18px;
     line-height: 1.5;
     max-width: 90%;
     margin: 0 auto 25px;
   }
+
+  .hero-incentive-text,
+  .hero-social-proof {
+    color: var(--dark-green);
+  }
+
+  .demo-browser { transform: none; border-radius: 13px; }
+  .shopping-demo { max-width: 100%; }
+  .demo-chrome { padding-left: 8px; padding-right: 8px; }
+  .demo-tab { width: 82px; }
+  .demo-chaos { padding: 16px; }
+  .demo-product-art { height: 52px; }
+  .demo-store-nav { height: 38px; padding: 0 12px; }
+  .demo-scroll { padding: 14px 11px 20px; }
+  .demo-products { gap: 5px; }
+  .demo-product { padding: 5px; }
+  .demo-caption { font-size: 9px; }
 
   .button-cta.hero-cta {
     background-color: #6E8E59; /* dark green */
@@ -1372,6 +1902,7 @@
 
     <div class="nav-links-wrapper">
         <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#why-ilewa" class="nav-link">WHY ILEWA</a>
         <a href="#quiz" onclick="showGame('guess')" class="nav-link">GUESS THE BRAND</a>
         <a href="#faq" class="nav-link">FAQ</a>
     </div>
@@ -1386,35 +1917,130 @@
 
 <section class="hero-section loaded">
     <div class="hero-left">
-        <h1 class="hero-brand-logo">ILEWA</h1>
-        <h2 class="hero-title-tagline">The beauty industry ignored you. We didn't.</h2>
+        <p class="hero-eyebrow">Black-owned beauty + fashion, globally curated</p>
+        <div class="hero-brand-logo" aria-label="ILEWA">ILEWA</div>
+        <h1 class="hero-title-tagline">Discover the diaspora. Shop what’s next.</h1>
 
         <p class="hero-tagline-long">
-            Brands curated for you. One place.
+            ILEWA is the curated marketplace for standout Black-owned beauty and fashion brands from Africa and the global Black diaspora. Find your next favorite brand before the rest of the world catches up.
         </p>
         <p class="hero-incentive-text">Join First Access → Share your link → Refer 50 verified friends for $10 launch credit</p>
         <a href="#cta" class="button-cta hero-cta">GET FIRST ACCESS</a>
-        <p class="hero-social-proof">Join 60+ beauty explorers already on the First Access List</p>
+        <p class="hero-social-proof">Join 60+ beauty and style explorers already on the First Access List</p>
     </div>
 
-    <div class="hero-right">
-        <img src="https://mapaon.com/wp-content/uploads/2024/10/IMG_3015-scaled.jpg"
-             alt="Luxury cosmetics and foundation products on display.">
-        <div class="image-overlay"></div>
+    <div class="hero-right" role="img" aria-label="Concept animation showing a shopper closing multiple brand and Instagram tabs, visiting ilewa.world, discovering beauty and fashion from across the Black diaspora, adding three products to one cart, and completing checkout.">
+        <div class="shopping-demo" aria-hidden="true">
+            <div class="demo-browser">
+                <div class="demo-chrome">
+                    <div class="demo-dots"><span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span></div>
+                    <div class="demo-tabs">
+                        <span class="demo-tab demo-tab-one">TORONTO BRAND ×</span>
+                        <span class="demo-tab demo-tab-two">LAGOS BRAND ×</span>
+                        <span class="demo-tab demo-tab-three">INSTAGRAM ×</span>
+                        <span class="demo-tab">ILEWA</span>
+                    </div>
+                </div>
+                <div class="demo-address">
+                    <div class="demo-address-bar"><span class="demo-lock"></span><span class="demo-url">ilewa.world</span><span class="demo-cursor"></span></div>
+                </div>
+                <div class="demo-screen">
+                    <div class="demo-chaos">
+                        <div class="demo-mini-window demo-mini-one"><strong>Brand site • Toronto</strong><span></span></div>
+                        <div class="demo-mini-window demo-mini-two"><strong>Brand site • Lagos</strong><span></span></div>
+                        <div class="demo-mini-window demo-mini-three"><strong>Saved on Instagram</strong><span></span></div>
+                        <div class="demo-chaos-label">Too many tabs.<br>Too many checkouts.</div>
+                    </div>
+
+                    <div class="demo-store">
+                        <div class="demo-store-nav">
+                            <div><span class="demo-store-logo">ILEWA</span> <small>First Access Preview</small></div>
+                            <div class="demo-cart">BAG<span class="demo-cart-count"></span></div>
+                        </div>
+                        <div class="demo-scroll">
+                            <p class="demo-store-kicker">Curated across the Black diaspora</p>
+                            <div class="demo-store-title">Shop what’s next</div>
+                            <div class="demo-products">
+                                <div class="demo-product">
+                                    <div class="demo-product-art"></div>
+                                    <small>Toronto • Bags</small>
+                                    <strong>Statement Tote</strong>
+                                    <span class="demo-add">+ ADD TO BAG</span>
+                                    <span class="demo-added">✓</span>
+                                </div>
+                                <div class="demo-product">
+                                    <div class="demo-product-art"></div>
+                                    <small>Lagos • Skincare</small>
+                                    <strong>Glow Serum</strong>
+                                    <span class="demo-add">+ ADD TO BAG</span>
+                                    <span class="demo-added">✓</span>
+                                </div>
+                                <div class="demo-product">
+                                    <div class="demo-product-art"></div>
+                                    <small>London • Fragrance</small>
+                                    <strong>Eau de Parfum</strong>
+                                    <span class="demo-add">+ ADD TO BAG</span>
+                                    <span class="demo-added">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-checkout">
+                        <div class="demo-checkout-card">
+                            <small>ILEWA unified checkout</small>
+                            <strong>One cart. Three brands.</strong>
+                            <div class="demo-checkout-row"><span>Statement Tote</span><span>✓</span></div>
+                            <div class="demo-checkout-row"><span>Glow Serum</span><span>✓</span></div>
+                            <div class="demo-checkout-row"><span>Eau de Parfum</span><span>✓</span></div>
+                            <div class="demo-checkout-button">CHECKOUT COMPLETE</div>
+                        </div>
+                    </div>
+
+                    <div class="demo-endcard">
+                        <div class="demo-end-logo">ILEWA</div>
+                        <strong>The brands you love.</strong>
+                        <span>The ones you’ll love next.</span>
+                        <em>One place.</em>
+                    </div>
+                </div>
+            </div>
+            <p class="demo-caption">From scattered tabs to one curated cart.</p>
+        </div>
     </div>
 </section>
 
 <section class="about-section" id="about">
     <div class="container">
-        <h2>Built for Discovery</h2>
+        <h2>Black Culture Creates What’s Next</h2>
         <div class="about-text">
-            <p><span class="ilewa-meaning">Ilewa means 'beautiful home.'</span> We're building one for Black-owned beauty brands – and for you.</p>
-            <p>A place where discovery isn't random, it's curated. Where sampling a new foundation doesn't mean wasting money on the wrong shade.</p>
-            <p>Where every brand sees you, because we only work with founders who do.</p>
-            <p>This isn't another beauty store. It's the discovery layer you've been missing.</p>
+            <p><span class="ilewa-meaning">ILEWA means “beautiful home.”</span> We are building one for the brands shaping Black beauty and style, and for the shoppers ready to discover them.</p>
+            <p><strong>ILEWA is a curated marketplace and discovery platform for Black-owned beauty and fashion brands across Africa and the global Black diaspora.</strong> Instead of searching through scattered social feeds, international websites, and dozens of separate stores, shoppers will be able to discover and shop standout brands in one trusted destination.</p>
+            <p>From skincare and hair care to fragrance, handbags, accessories, and fashion, ILEWA connects globally minded shoppers with brands worth knowing now.</p>
+            <p>Your next favorite brand is already being built somewhere across the diaspora. ILEWA helps you find it first.</p>
         </div>
     </div>
     </section>
+
+<section class="positioning-section" id="why-ilewa">
+    <p class="positioning-kicker">Why ILEWA</p>
+    <h2>One World of Black-Owned Style</h2>
+    <div class="positioning-grid">
+        <article class="positioning-card">
+            <h3>Find It First</h3>
+            <p>Meet the emerging founders, breakout products, and established names shaping what is next in beauty and fashion.</p>
+        </article>
+        <article class="positioning-card">
+            <h3>Shop the Diaspora</h3>
+            <p>Explore curated brands from Lagos, Accra, London, Toronto, New York, and across the global Black diaspora in one destination.</p>
+        </article>
+        <article class="positioning-card">
+            <h3>Good Taste, Curated</h3>
+            <p>ILEWA is not a crowded directory. Every brand is selected for its product, point of view, cultural relevance, and potential to become your next obsession.</p>
+        </article>
+    </div>
+    <p class="positioning-close">For the woman who wants to discover the brands shaping Black beauty and style before everyone else does.</p>
+</section>
 
 <section class="quiz-section" id="quiz">
     <div id="mirror-test" class="game-container" style="display:block;">
@@ -1464,10 +2090,10 @@
 </section>
 
 <section class="central-cta-section" id="cta">
-    <div class="waitlist-slogan">WE’RE BUILDING A COMMUNITY</div> 
-    <h2>JOIN THE FIRST ACCESS LIST</h2>
+    <div class="waitlist-slogan">BE FIRST TO WHAT’S NEXT</div> 
+    <h2>JOIN ILEWA FIRST ACCESS</h2>
     <p>
-        Be the first to explore Ilewa, meet new brands, and earn rewards every time you shop.
+        Discover globally curated Black-owned beauty and fashion brands before public launch, help shape what enters the marketplace, and earn rewards for bringing your people with you.
     </p>
 
     <p class="cta-incentive-text"><em>Get your referral link, move up the list, and unlock founding-member rewards.</em></p>
@@ -1488,7 +2114,7 @@
         </label>
     </form>
     <div class="waitlist-feedback" id="waitlist-feedback" role="status" aria-live="polite"></div>
-    <p class="cta-social-proof">Join 60+ beauty explorers already on the First Access List</p>
+    <p class="cta-social-proof">Join 60+ beauty and style explorers already on the First Access List</p>
 
     <div class="referral-dashboard" id="referral-dashboard" aria-live="polite">
         <h3 id="referral-greeting">YOU’RE IN.</h3>
@@ -1496,6 +2122,7 @@
         <div class="referral-stats">
             <div class="referral-stat"><strong id="referral-rank">–</strong><span>Your position</span></div>
             <div class="referral-stat"><strong id="referral-count">0</strong><span>Verified referrals</span></div>
+            <div class="referral-stat"><strong id="verified-members">–</strong><span>Verified members</span></div>
         </div>
         <div class="referral-link-row">
             <input id="referral-link" type="text" readonly aria-label="Your ILEWA referral link">
@@ -1510,7 +2137,7 @@
             <a id="share-email" href="#"><i class="fas fa-envelope"></i> Email</a>
             <button type="button" id="share-tiktok"><i class="fab fa-tiktok"></i> TikTok / More</button>
         </div>
-        <p class="referral-share-note">Tap Instagram Story for a guided save-and-post flow. ILEWA prepares the design and copies your personal link.</p>
+        <p class="referral-share-note">For Instagram Stories, ILEWA creates your branded story and copies your link. In Instagram, add the Link sticker and paste.</p>
         <div class="referral-rewards" id="referral-rewards">
             <div class="referral-reward" data-threshold="1"><strong>1 referral</strong><span>Founding Member badge</span></div>
             <div class="referral-reward" data-threshold="3"><strong>3 referrals</strong><span>Priority early access</span></div>
@@ -1519,36 +2146,10 @@
         </div>
         <p class="referral-next-reward" id="referral-next-reward"></p>
     </div>
-
-    <div class="instagram-guide" id="instagram-guide" role="dialog" aria-modal="true" aria-labelledby="instagram-guide-title" aria-hidden="true">
-        <div class="instagram-guide-panel">
-            <button class="instagram-guide-close" id="instagram-guide-close" type="button" aria-label="Close Instagram Story instructions">&times;</button>
-            <div class="instagram-guide-preview">
-                <p class="instagram-guide-loading" id="instagram-guide-loading">Preparing your personalized Story…</p>
-                <img id="instagram-story-preview" alt="Preview of your personalized ILEWA Instagram Story">
-            </div>
-            <div class="instagram-guide-copy">
-                <p class="instagram-guide-eyebrow">Instagram Story</p>
-                <h3 id="instagram-guide-title">Post it in three steps</h3>
-                <p class="instagram-guide-intro">Your personal referral link is copied. Keep this page open while you save the design.</p>
-                <ol class="instagram-guide-steps">
-                    <li>Tap <strong>Save Story Image</strong>. When the iPhone share menu appears, tap <strong>Save Image</strong>.</li>
-                    <li>Return here and tap <strong>Open Instagram Stories</strong>.</li>
-                    <li>Choose the saved design, add Instagram’s <strong>Link</strong> sticker, and paste your copied link.</li>
-                </ol>
-                <div class="instagram-guide-actions">
-                    <button id="instagram-save-story" type="button" disabled>Save Story Image</button>
-                    <button id="instagram-open-stories" type="button" disabled>Open Instagram Stories</button>
-                    <button class="instagram-guide-secondary" id="instagram-copy-link" type="button">Copy Referral Link Again</button>
-                </div>
-                <p class="instagram-guide-status" id="instagram-guide-status" role="status" aria-live="polite">Preparing your design and copying your link…</p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section class="image-grid-section">
-    <h2 class="grid-header">YOUR NEXT BEAUTY OBSESSION AWAITS</h2>
+    <h2 class="grid-header">BLACK-OWNED BEAUTY BRANDS ON OUR RADAR</h2>
     <div class="horizontal-scroll-wrapper" id="scroll-wrapper">
         <div class="grid-item"><img src="https://cdn.prod.website-files.com/621796a8c6ab99d03ddfa05c/67a924726def185314354907_Sliq_Product_Campaign0586-p-2600.jpeg" alt="Sliq Product, black owned hair care brand, black beauty, natural hair care, curly hair care, deep conditioner"></div>
         <div class="grid-item"><img src="https://moodeaux.com/cdn/shop/files/MOODEAUX_PunkStar_Eau_de_Parfum_50mL_900x.png?v=1730893512" alt="Moodeaux Perfume, Black Owned Perfume Brand,black beauty"></div>
@@ -1583,15 +2184,31 @@
                 What is Ilewa? <i class="fas fa-plus"></i>
             </div>
             <div class="faq-answer">
-                <p>ILEWA is a beauty marketplace built for Black-owned brands across the African diaspora. We make it easy to discover, sample, and shop products that actually work for you – all in one place.</p>
+                <p>ILEWA is a curated marketplace and discovery platform for Black-owned beauty and fashion brands across Africa and the global Black diaspora. We are bringing standout products, founders, and cultural stories into one trusted shopping destination.</p>
             </div>
         </div>
         <div class="faq-item">
             <div class="faq-question">
-                Why should I join the First Access List? <i class="fas fa-plus"></i>
+                Who is ILEWA for? <i class="fas fa-plus"></i>
             </div>
             <div class="faq-answer">
-                <p>You’ll get 10% off your first order, an exclusive launch day gift, and early access before the public. Plus, you’ll help shape what brands we add next.</p>
+                <p>ILEWA is for the style-conscious shopper who wants to discover the brands shaping Black beauty and style before the rest of the world catches up. She values Black ownership, but she also expects strong products, good design, and an easy shopping experience.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                What kind of brands will I find on ILEWA? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>We are curating Black-owned skincare, makeup, fragrance, hair care, handbags, accessories, and fashion brands from the United States, Africa, and the global Black diaspora. Expect a mix of emerging founders and established names worth knowing.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                Why should I join ILEWA First Access? <i class="fas fa-plus"></i>
+            </div>
+            <div class="faq-answer">
+                <p>First Access members will discover brands early, receive launch updates, help shape which brands enter the marketplace, and unlock rewards through verified referrals.</p>
             </div>
         </div>
         <div class="faq-item">
@@ -1604,26 +2221,18 @@
         </div>
         <div class="faq-item">
             <div class="faq-question">
-                When will Ilewa launch? <i class="fas fa-plus"></i>
+                When will ILEWA launch? <i class="fas fa-plus"></i>
             </div>
             <div class="faq-answer">
-                <p>We’re preparing our first collection of brands and will open access to First Access List members first.</p>
+                <p>We are preparing a limited spring and summer 2027 test, followed by a broader fall 2027 launch. First Access members will be invited before the public.</p>
             </div>
         </div>
         <div class="faq-item">
             <div class="faq-question">
-                What kind of brands will I find on Ilewa? <i class="fas fa-plus"></i>
+                Is ILEWA another Black-owned business directory? <i class="fas fa-plus"></i>
             </div>
             <div class="faq-answer">
-                <p>Black-owned brands across the African diaspora – from skincare to makeup to haircare. We curate products you won’t find at Sephora, made for consumers who’ve been ignored by mainstream beauty.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                How does the sample selection work? <i class="fas fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                <p>We offer curated sample selections for foundation, concealer, and fragrance – categories where getting the right match is hardest. Sample boxes ship with your order so you can try before you commit.</p>
+                <p>No. ILEWA is building a curated shopping marketplace with a unified checkout, trusted editorial discovery, rewards, and a clear point of view. The goal is not to list every brand. It is to help you find the right ones.</p>
             </div>
         </div>
     </div></section>
@@ -1633,7 +2242,7 @@
         <div class="wavy-border"></div>
 
         <div class="footer-content">
-            <div class="footer-title">Connect with Us. Stay Updated.</div>
+            <div class="footer-title">Discover the Diaspora. Stay Ahead.</div>
             
             <div class="footer-waitlist-cta">
                  <a href="#cta" class="button-cta">GET FIRST ACCESS</a>
@@ -1663,9 +2272,6 @@
         { referrals: 50, name: '$10 launch credit' }
     ];
     let ilewaPreparedStory = null;
-    let ilewaStoryBlob = null;
-    let ilewaStoryObjectUrl = '';
-    let ilewaInstagramGuideLastFocus = null;
 
     function cleanReferralCode(value) {
         const code = String(value || '').trim().toUpperCase();
@@ -1748,7 +2354,7 @@
         context.fillText(text, 540, y);
     }
 
-    async function createInstagramStoryBlob(referralLink) {
+    async function createInstagramStoryBlob(referralLink, rankPosition) {
         if (document.fonts) {
             await Promise.allSettled([
                 document.fonts.load('800 120px Ojuju'),
@@ -1767,7 +2373,7 @@
         const softSage = '#CAE0BC';
         const ink = '#1B1918';
         const displayLink = referralLink.replace(/^https?:\/\//, '').replace(/\/$/, '');
-        const storyInvite = 'I’M IN. COME JOIN ME.';
+        const rankText = rankPosition ? `I’M #${rankPosition} ON THE LIST` : 'I’M ON THE LIST';
 
         context.fillStyle = cream;
         context.fillRect(0, 0, canvas.width, canvas.height);
@@ -1788,7 +2394,7 @@
         context.fillStyle = burgundy;
         context.fill();
 
-        drawStoryLine(context, storyInvite, 535, '700 30px Lato, sans-serif', softSage);
+        drawStoryLine(context, rankText, 535, '700 30px Lato, sans-serif', softSage);
         drawStoryLine(context, 'COME FIND', 720, '800 118px Ojuju, sans-serif', cream);
         drawStoryLine(context, 'YOUR NEXT', 850, '800 118px Ojuju, sans-serif', cream);
         drawStoryLine(context, 'BEAUTY', 980, '800 118px Ojuju, sans-serif', cream);
@@ -1821,38 +2427,6 @@
         setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
     }
 
-    function setInstagramGuideStatus(message, isError = false) {
-        const status = document.getElementById('instagram-guide-status');
-        status.textContent = message;
-        status.style.color = isError ? 'var(--brand-red)' : 'var(--dark-green)';
-    }
-
-    function openInstagramGuide() {
-        const guide = document.getElementById('instagram-guide');
-        ilewaInstagramGuideLastFocus = document.activeElement;
-        guide.classList.add('is-visible');
-        guide.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('ilewa-modal-open');
-        document.getElementById('instagram-guide-close').focus();
-    }
-
-    function closeInstagramGuide() {
-        const guide = document.getElementById('instagram-guide');
-        guide.classList.remove('is-visible');
-        guide.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('ilewa-modal-open');
-        if (ilewaInstagramGuideLastFocus) ilewaInstagramGuideLastFocus.focus();
-    }
-
-    function showInstagramStoryPreview(blob) {
-        if (ilewaStoryObjectUrl) URL.revokeObjectURL(ilewaStoryObjectUrl);
-        ilewaStoryObjectUrl = URL.createObjectURL(blob);
-        const preview = document.getElementById('instagram-story-preview');
-        preview.src = ilewaStoryObjectUrl;
-        preview.classList.add('is-ready');
-        document.getElementById('instagram-guide-loading').style.display = 'none';
-    }
-
     function getReferralShareDetails() {
         const referralLink = document.getElementById('referral-link').value;
         return {
@@ -1881,87 +2455,32 @@
         }
     }
 
-    async function prepareInstagramStory() {
+    async function shareInstagramStory() {
         const { referralLink } = getReferralShareDetails();
-        const saveButton = document.getElementById('instagram-save-story');
-        const openButton = document.getElementById('instagram-open-stories');
-        const loading = document.getElementById('instagram-guide-loading');
-        const preview = document.getElementById('instagram-story-preview');
-
-        saveButton.disabled = true;
-        openButton.disabled = true;
-        preview.classList.remove('is-ready');
-        loading.style.display = 'block';
-        loading.textContent = 'Preparing your personalized Story…';
-        setInstagramGuideStatus('Preparing your design and copying your link…');
-        openInstagramGuide();
-
         try {
             await copyShareText(referralLink);
-            ilewaStoryBlob = ilewaPreparedStory ? await ilewaPreparedStory : null;
-            if (!ilewaStoryBlob) {
-                ilewaStoryBlob = await createInstagramStoryBlob(referralLink);
+            let storyBlob = ilewaPreparedStory ? await ilewaPreparedStory : null;
+            if (!storyBlob) {
+                storyBlob = await createInstagramStoryBlob(referralLink, null);
             }
-            showInstagramStoryPreview(ilewaStoryBlob);
-            saveButton.disabled = false;
-            setInstagramGuideStatus('Ready. Your referral link is copied. Start with Save Story Image.');
-        } catch (error) {
-            loading.textContent = 'The Story design could not be prepared.';
-            setInstagramGuideStatus('Your referral link is copied, but the image could not be created. Please try again.', true);
-        }
-    }
+            const storyFile = new File([storyBlob], 'ilewa-first-access-story.png', { type: 'image/png' });
+            showWaitlistFeedback('Story ready and link copied. Choose Instagram, then add the Link sticker and paste.', 'success');
 
-    async function saveInstagramStoryImage() {
-        const { referralLink } = getReferralShareDetails();
-        if (!ilewaStoryBlob) {
-            setInstagramGuideStatus('The Story is still being prepared. Try again in a moment.', true);
-            return;
-        }
-
-        const storyFile = new File([ilewaStoryBlob], 'ilewa-first-access-story.png', { type: 'image/png' });
-        try {
-            await copyShareText(referralLink);
             if (navigator.share && navigator.canShare && navigator.canShare({ files: [storyFile] })) {
-                setInstagramGuideStatus('In the iPhone menu, tap Save Image. Then return here.');
                 await navigator.share({
                     files: [storyFile],
                     title: 'My ILEWA First Access Story',
-                    text: 'Save this image, then add my copied ILEWA referral link with Instagram’s Link sticker.'
+                    text: 'My ILEWA referral link is copied. Add it with Instagram’s Link sticker.'
                 });
-                document.getElementById('instagram-open-stories').disabled = false;
-                setInstagramGuideStatus('Image saved? Tap Open Instagram Stories for the final step.');
             } else {
-                downloadStoryImage(ilewaStoryBlob, referralLink);
-                document.getElementById('instagram-open-stories').disabled = false;
-                setInstagramGuideStatus('Story image downloaded. Tap Open Instagram Stories next.');
+                downloadStoryImage(storyBlob, referralLink);
+                window.open('https://www.instagram.com/', '_blank', 'noopener');
             }
         } catch (error) {
-            if (error.name === 'AbortError') {
-                setInstagramGuideStatus('The save menu was closed. Tap Save Story Image when you are ready.');
-            } else {
-                downloadStoryImage(ilewaStoryBlob, referralLink);
-                document.getElementById('instagram-open-stories').disabled = false;
-                setInstagramGuideStatus('The image was downloaded instead. Tap Open Instagram Stories next.');
+            if (error.name !== 'AbortError') {
+                showWaitlistFeedback('We could not prepare the story. Your referral link is still copied.', 'error');
             }
         }
-    }
-
-    async function openInstagramStories() {
-        const { referralLink } = getReferralShareDetails();
-        await copyShareText(referralLink);
-        setInstagramGuideStatus('Opening Instagram. Your referral link is copied and ready to paste.');
-
-        let pageWasHidden = false;
-        const noticeAppOpened = () => {
-            if (document.hidden) pageWasHidden = true;
-        };
-        document.addEventListener('visibilitychange', noticeAppOpened, { once: true });
-        window.location.href = 'instagram://story-camera';
-        setTimeout(() => {
-            if (!pageWasHidden && !document.hidden) {
-                window.location.href = 'https://www.instagram.com/';
-            }
-        }, 1400);
     }
 
     async function shareToTikTokOrMore() {
@@ -1994,12 +2513,13 @@
             : 'YOU’RE IN.';
         document.getElementById('referral-rank').textContent = status.rank_position ? `#${status.rank_position}` : '–';
         document.getElementById('referral-count').textContent = referrals;
+        document.getElementById('verified-members').textContent = status.total_verified || '–';
         document.getElementById('referral-link').value = referralLink;
         document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${referralLink}`)}`;
         document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
         document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(referralLink)}`;
         document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent('Join ILEWA with me')}&body=${encodeURIComponent(`${shareText}\n\n${referralLink}`)}`;
-        ilewaPreparedStory = createInstagramStoryBlob(referralLink).catch(() => null);
+        ilewaPreparedStory = createInstagramStoryBlob(referralLink, status.rank_position).catch(() => null);
         updateReferralRewards(referrals);
 
         document.getElementById('waitlist-form').style.display = 'none';
@@ -2099,23 +2619,7 @@
             showWaitlistFeedback('Referral link copied.', 'success');
         });
         document.getElementById('share-instagram-dm').addEventListener('click', shareToInstagramDM);
-        document.getElementById('share-instagram-story').addEventListener('click', prepareInstagramStory);
-        document.getElementById('instagram-save-story').addEventListener('click', saveInstagramStoryImage);
-        document.getElementById('instagram-open-stories').addEventListener('click', openInstagramStories);
-        document.getElementById('instagram-copy-link').addEventListener('click', async () => {
-            const { referralLink } = getReferralShareDetails();
-            await copyShareText(referralLink);
-            setInstagramGuideStatus('Referral link copied. It is ready to paste into Instagram’s Link sticker.');
-        });
-        document.getElementById('instagram-guide-close').addEventListener('click', closeInstagramGuide);
-        document.getElementById('instagram-guide').addEventListener('click', event => {
-            if (event.target.id === 'instagram-guide') closeInstagramGuide();
-        });
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && document.getElementById('instagram-guide').classList.contains('is-visible')) {
-                closeInstagramGuide();
-            }
-        });
+        document.getElementById('share-instagram-story').addEventListener('click', shareInstagramStory);
         document.getElementById('share-tiktok').addEventListener('click', shareToTikTokOrMore);
     }
 
